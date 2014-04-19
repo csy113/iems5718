@@ -3,6 +3,7 @@ import logging
 from user_func import getUserInfo
 from time_func import str2datetime, datetime2str, getTimeNow, isToday
 from comment_func import getCommentList
+from sendmail import sendImmediateEmail
 
 class Event(ndb.Model):
 	ownerid = ndb.StringProperty()
@@ -66,6 +67,8 @@ def finalizeEvent(eventid, finaltime):
 	event = ndb.Key('Event', int(eventid)).get()
 	event.finalized=True
 	event.finaltime=str2datetime(finaltime)
+
+	sendImmediateEmail(eventid, event.name)
 
 def voteEvent(eventid, userid, voteList):
 	parentkey = ndb.Key('Event', int(eventid))

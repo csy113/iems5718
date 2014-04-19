@@ -15,13 +15,13 @@ def sendImmediateEmail(eventid,eventname):
 	for item in userlist:
 			useremail=item.email
 			message = mail.EmailMessage(sender=senderemail,
-											subject="Your account has been approved")
+											subject="Event World: Your event is finalized!")
 
 			message.to = useremail
 			message.body = """
 Dear """+ item.name + """:
 The event owner has finalized the event--"""+eventname+""". Please check by the following link and attend the event in time.
-"""+ """http://"""+projectid+""".appspot.com/event/view?eventid="""+str(eid)+"""
+"""+ """http://"""+projectid+""".appspot.com/event/view?eventid="""+str(eventid)+"""
 
 Enjoy the event and have a good time.
 
