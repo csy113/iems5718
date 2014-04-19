@@ -3,6 +3,7 @@ import logging
 from user_func import getUserInfo
 from time_func import str2datetime, datetime2str, getTimeNow, isToday
 from comment_func import getCommentList
+from sendmail import sendImmediateEmail
 
 class Event(ndb.Model):
 	ownerid = ndb.StringProperty()
@@ -48,8 +49,10 @@ def addEvent(ownerid, name, summary, my1Time, my2Time, my3Time, location,
 		event.my2Time=str2datetime(my2Time)
 		event.my3Time=str2datetime(my3Time)
 		event.location=location
-		event.lagitude=lagitude
-		event.longitude=longitude
+		if lagitude is not None:
+			event.lagitude=lagitude
+		if longitude is not None:
+			event.longitude=longitude
 		key = event.put()
 		logging.info('Event added with key %s' % key)
 
@@ -64,6 +67,8 @@ def finalizeEvent(eventid, finaltime):
 	event = ndb.Key('Event', int(eventid)).get()
 	event.finalized=True
 	event.finaltime=str2datetime(finaltime)
+
+	sendImmediateEmail(eventid, event.name)
 
 def voteEvent(eventid, userid, voteList):
 	parentkey = ndb.Key('Event', int(eventid))

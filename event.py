@@ -34,8 +34,13 @@ class SubmitEvent(webapp2.RequestHandler):
 
 
 		splitted = coordinate.split(',')
-		lagitude = float(splitted[0])
-		longitude = float(splitted[1])
+		try:
+			lagitude = float(splitted[0])
+			longitude = float(splitted[1])
+		except ValueError as e:
+			logging.warn("Catch ValueError: %s" % e)
+			lagitude = None
+			longitude = None
 
 		event_func.addEvent(ownerid, name, summary, my1Time,
 			my2Time, my3Time,
