@@ -1,4 +1,4 @@
-application: thermal-highway-510
+application: static-shine-554
 version: 1
 runtime: python27
 api_version: 1
@@ -33,6 +33,9 @@ handlers:
   
 - url: /comments/.*
   script: comment.app
+
+- url: /report/.*
+  script: report.app
 
 - url: /images
   static_dir: images

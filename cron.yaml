@@ -1,0 +1,5 @@
+# https://developers.google.com/appengine/docs/python/config/cron
+cron:
+- description: daily email report
+  url: /report/dailyemail
+  schedule: every 24 hours
