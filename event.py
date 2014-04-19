@@ -72,6 +72,7 @@ class SubmitFinalize(webapp2.RequestHandler):
 	def post(self):
 		eventid = self.request.get('eventid')
 		finaltime = self.request.get('finaltime')
+		logging.info ('eventid %s, finaltime %s' % (eventid, finaltime))
 		event_func.finalizeEvent(int(eventid), finaltime)
 		
 

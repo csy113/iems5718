@@ -176,10 +176,10 @@
           <label for="exampleInputEmail1">Make some comments here.</label>
           <div class="input-group" style="width:75%">
             <input type="text" id="commentContent"  class="form-control"  placeholder="Enter comments"/>
-            <span class="input-group-btn"><button type="button" class="btn btn-primary" onclick="submitComment()" align=right>Submit Comment</button></span>
+            <span class="input-group-btn"><button type="button" class="btn btn-success" onclick="submitComment()" align=right>Submit Comment</button></span>
   	      </div>
           
-          <table class="table" id="commentTable" style="width:80%">
+          <table class="table" id="commentTable" style="width:75%">
             {% for comment in commentlist %}
             <tr><td><span style="color:blue">{{comment[0]}}</span>: {{comment[1]}}</td><td>{{comment[2]}}</td></tr>
 				    {% endfor %}  

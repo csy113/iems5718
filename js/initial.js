@@ -61,8 +61,10 @@ function deleteTime(divNum) {
 	event.preventDefault();
 	$('#'+divNum).remove();
 	flag--;
-	if(flag<4)
+  if(flag<4){
   		$("#confirm_date").removeAttr('disabled');
+    $("#datetime").removeAttr('disabled');
+  }
 }
 function cancel(){
   //alert("Do you really want to cancel it?");
@@ -91,7 +93,7 @@ function setTime() {
   flag=count-min;
   $('#timeContent').append(' <div id='+divIdName+' style="font-family:courier">'+timeDisplay+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="#" onclick="deleteTime(\'' + divIdName + '\')">   Delete</a></div>');
   time[(count-1)]=timeDisplay;
-  alert(time[count-1]);
+  //alert(time[count-1]);
   count++;
   
   
@@ -119,7 +121,7 @@ function submitForm(){
         }
       });
       
-      alert('Successfully create this event!');
+      //alert('Successfully create this event!');
       $("#submitEvent").attr("disabled", "disabled");
      // jConfirm('Successfully initial this event!', 'Confirmation Dialog', function() {
       window.location.href="/home"; 
@@ -188,9 +190,6 @@ $(document).ready(function() {
     }else
       $("#confirm_date").removeAttr("disabled");
    });
-  
-  
-  
   
   if($("#eventid").val().length!=0){
     $("#commentArea").show();

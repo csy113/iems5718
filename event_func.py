@@ -67,6 +67,7 @@ def finalizeEvent(eventid, finaltime):
 	event = ndb.Key('Event', int(eventid)).get()
 	event.finalized=True
 	event.finaltime=str2datetime(finaltime)
+	event.put()
 
 	sendImmediateEmail(eventid, event.name)
 

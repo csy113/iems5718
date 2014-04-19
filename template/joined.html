@@ -76,11 +76,15 @@
 				  </thead>
 				  <tbody id="eventContent">
 				  {% for eventObject in eventlist %}
-            {% if eventObject[4] %}
-            <tr><td><s>{{eventObject[0]}}</s></td><td><s>{{eventObject[2]}}</s></td><td><s>{{eventObject[1]}}</s></td></tr>
+            {{eventObject[5]}}
+            {% if eventObject[5] %}
+            <tr style="color:red;"><td><a style="color:red;" href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}} (Finalized!)</a></td><td>{{eventObject[2]}} (Finalized)</td><td>{{eventObject[1]}} (Finalized!)</td></tr>
+            {% elif eventObject[4] %}
+            <tr style="color:gray;"><td><s>{{eventObject[0]}}</s></td><td><s>{{eventObject[2]}}</s></td><td><s>{{eventObject[1]}}</s></td></tr>  
             {% else %}
             <tr><td><a href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}}</a></td><td>{{eventObject[2]}}</td><td>{{eventObject[1]}}</td></tr>
             {% endif %}
+            
 				  {% endfor %}
 				</tbody>
 				
@@ -103,7 +107,7 @@
 				{% endfor %}
         </tbody>
 	</table>
-  <p id="date"></p>
+
 	<hr>
   <footer align=center>© 2014 IEMS5718-Group13. All rights reserved.</footer>
 

@@ -87,9 +87,9 @@ function joinEvent(){
           eventid:$("#eventId").val(),
         }
       });
-  alert("Join successfully!");
+  
   //jConfirm('Successfully join this event!', 'Confirmation Dialog', function() {
-    window.location.href="/home"; 
+    //window.location.href="/home"; 
   //});
   
   //jAlert('Successfully join this event!');
@@ -101,6 +101,8 @@ function joinEvent(){
   
  //alert("Join this event successfully!");
   $("#join").attr("disabled", "disabled");
+  window.location.reload();
+  //$('#joinModal').modal('toggle');
   //
       //alert(chosenList);
 }
