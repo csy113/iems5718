@@ -109,12 +109,14 @@ class ViewEvent(webapp2.RequestHandler):
 class EditEvent(webapp2.RequestHandler):
 	def get(self):
 		user = user_func.getCurrentUser(self)
-		userlist = user_func.getUserList()
+		userlist = user_func.getUserNameList()
 		logoutlink = users.create_logout_url('/')
 
 		template_values = {
 			'logoutlink' : logoutlink,
 			'user': user,
+			'lat': 22.396428,
+			'long': 114.109497,
 			'userlist' : userlist,
       'length':0
 		}

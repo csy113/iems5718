@@ -26,11 +26,16 @@ def getUserInfo(user_id):
 	user = userkey.get()
 	return user
 	
-def getUserList():
+def getUserNameList():
 	query = User.query()
 	result = query.fetch()
 	userlist = [] 
 	for user in result:
 		userlist.append(user.name)
 	return userlist
+
+def getUserList():
+	query = User.query()
+	result = query.fetch()
+	return result 
 

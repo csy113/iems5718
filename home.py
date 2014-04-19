@@ -18,7 +18,7 @@ class HomePage(webapp2.RequestHandler):
 	def get(self):
 		user = user_func.getCurrentUser(self)
 		logoutlink = users.create_logout_url('/')
-		userlist = user_func.getUserList()
+		userlist = user_func.getUserNameList()
 		eventlist = event_func.getEventList()
 		template_values = {
 			'logoutlink' : logoutlink,
@@ -33,7 +33,7 @@ class JoinedEventPage(webapp2.RequestHandler):
 	def get(self):
 		user = user_func.getCurrentUser(self)
 		logoutlink = users.create_logout_url('/')
-		userlist = user_func.getUserList()
+		userlist = user_func.getUserNameList()
 		eventlist = event_func.getEventListByVoter(user.user_id())
 		template_values = {
 			'logoutlink' : logoutlink,
@@ -48,7 +48,7 @@ class MyEventPage(webapp2.RequestHandler):
 	def get(self):
 		user = user_func.getCurrentUser(self)
 		logoutlink = users.create_logout_url('/')
-		userlist = user_func.getUserList()
+		userlist = user_func.getUserNameList()
 		eventlist = event_func.getEventListByOwner(user.user_id())
 		template_values = {
 			'logoutlink' : logoutlink,
