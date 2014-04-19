@@ -5,7 +5,27 @@ var wrong=[0,0,0,0];
 var flag;
 var min=0;
 //var initialeventid=$('#eventid').val();
-
+function saveChoice(){
+  var finalTime='';
+  var i=0;
+  var tempId="radio"+i+"Name";
+  while(i<3){
+    if($("#"+tempId).val().length!=0){
+      if($('#'+tempId).checked)
+        finalTime=$('#'+tempId).val();
+    }
+    i++;
+  }
+  $.ajax({
+      url:'/comments/add',
+      type:'POST',
+      data:{
+        finaltime:finalTime,
+        eventid:$('#eventid').val(),
+      }
+   });
+  alert("save time successfully!");
+}
 function initialize() {
   var mapOptions = {
     center: new google.maps.LatLng(22.413533,114.21031),
@@ -119,7 +139,7 @@ function cancel(){
       eventid:$('#eventid').val(),
     }
   });
-  alert("Cancel event!");
+ // alert("Cancel event!");
       //jConfirm('Your event has been cancelled!', 'Confirmation Dialog', function() {
       window.location.href="/home"; 
       //});
@@ -145,10 +165,8 @@ function setTime() {
     $("#datetime").attr("disabled", "disabled");
   }
 }
-
-var submitForm=function (){
-    //alert(typeof($("#input-name").val()));
-    if($("#input-name").val()==""){
+var errorCheck=function(){
+  if($("#input-name").val()==""){
         document.getElementById('wrong').innerHTML = 'You have not set the event name!';
         $("#wrong").css('display', 'block');
         wrong[0]=1;
@@ -187,6 +205,10 @@ var submitForm=function (){
             $("#wrong").css('display', 'none');
         }
     }
+}
+function submitForm(){
+    //alert(typeof($("#input-name").val()));
+    
     
     if(wrong[0]==0&&wrong[1]==0&&wrong[2]==0&&wrong[3]==0){
        $("#wrong").css('display', 'none');
@@ -204,8 +226,8 @@ var submitForm=function (){
           eventid:$('#eventid').val(),
         }
       });
-      
-      alert('Successfully create this event!');
+      $('#submitModal').modal('show')
+      //alert('Successfully create this event!');
       $("#submitEvent").attr("disabled", "disabled");
      // jConfirm('Successfully initial this event!', 'Confirmation Dialog', function() {
       window.location.href="/home"; 
@@ -213,7 +235,7 @@ var submitForm=function (){
     
    }
  
-};
+}
 
 $(document).ready(function() {
   //alert(length);
@@ -250,7 +272,8 @@ $(document).ready(function() {
  // alert(today);
 	//$('#selector').val(today);
   google.maps.event.addDomListener(window, 'load', initialize);
-  $('#submitEvent').click(submitForm);
+  //$('#submitEvent').click(submitForm);
+  $('#submitEvent').click(errorCheck);
   //$('#dateSelect').datetimepicker();
   var $j = jQuery.noConflict();
   $j("#datetime").datetimepicker();  
