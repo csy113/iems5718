@@ -63,6 +63,13 @@ class SubmitCancel(webapp2.RequestHandler):
 		eventid = self.request.get('eventid')
 		event_func.cancelEvent(eventid)
 
+class SubmitFinalize(webapp2.RequestHandler):
+	def post(self):
+		eventid = self.request.get('eventid')
+		finaltime = self.request.get('finaltime')
+		finalizeEvent()
+		
+
 def listCountNonNone(list):
 	count = 0
 	for i in list:
@@ -98,7 +105,9 @@ class ViewEvent(webapp2.RequestHandler):
 			'long':event.longitude,
 			'eventid':eventid,
       'userid':users.get_current_user().user_id(),
-			'joineduserlist': joineduserlist
+			'joineduserlist': joineduserlist,
+			'finalized':event.finalized,
+			'finalizedtime':event.finaltime
 		}
 		if event.ownerid == user.user_id():
 			template = JINJA_ENVIRONMENT.get_template('/template/initial.html')
@@ -111,12 +120,11 @@ class EditEvent(webapp2.RequestHandler):
 		user = user_func.getCurrentUser(self)
 		userlist = user_func.getUserNameList()
 		logoutlink = users.create_logout_url('/')
-
 		template_values = {
 			'logoutlink' : logoutlink,
 			'user': user,
-			'lat': 22.396428,
-			'long': 114.109497,
+			'lat': 22.413533,
+			'long': 114.21031,
 			'userlist' : userlist,
       'length':0
 		}
@@ -129,4 +137,5 @@ app = webapp2.WSGIApplication([
     ('/event/submit', SubmitEvent),
     ('/event/submitvote', SubmitVote),
     ('/event/cancel', SubmitCancel),
+    ('/event/finalize', SubmitFinalize),
     ], debug=False)
