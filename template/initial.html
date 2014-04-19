@@ -62,12 +62,20 @@
 		    <div class="form-group" name="step1">
           <label for="exampleInputEmail1" style="font-size:24px;font-family: 'McLaren', cursive;">Step1: Set the event's name</label>
           <br/>
-          <input type="text" class="form-control" id="input-name" placeholder="Enter event's name" value="{{eventname}}"/>
+          {% if finalized %}
+            <input type="text" readonly="readonly" class="form-control" id="input-name" placeholder="Enter event's name" value="{{eventname}}"/>
+          {% else %}
+            <input type="text" class="form-control" id="input-name" placeholder="Enter event's name" value="{{eventname}}"/>
+          {% endif %}
   		  </div>
         <br/> 
         <div class="form-group" name="step2">
     			<label for="exampleInputEmail1" style="font-size:24px;font-family: 'McLaren', cursive;">Step2: Make some introduction here.</label>
-    			<input type="text" id="introduction" class="form-control" placeholder="Enter introduction" value="{{introduction}}"/>
+    			{% if finalized %}
+            <input type="text" readonly="readonly" class="form-control" id="input-name" placeholder="Enter event's introduction" value="{{introduction}}"/>
+          {% else %}
+            <input type="text" class="form-control" id="input-name" placeholder="Enter event's introduction" value="{{introduction}}"/>
+          {% endif %}
   		  </div>
 		
         <br/>
@@ -89,10 +97,13 @@
         <div calss="border-bottom-radius" id="timeContent" data-placeholder="My Placeholder String">
           <div id="placeHolder"><u><i>Chosen time shown here</i></u></div>
           <br/>
-          {% for i in range (0, length) %}
-          <div style="font-family:courier"><span>{{i+1}}. {{datelist[i]}} </span> &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span></div> <br/>
-				   {% endfor %}
-
+          {% if finalized %}
+          <div style="font-family:courier"><span>{{finalizedtime}}</span></div>
+          {% else %}
+            {% for i in range (0, length) %}
+              <div style="font-family:courier"><span>{{i+1}}. {{datelist[i]}} </span> &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span></div> <br/>
+				    {% endfor %}
+          {% endif %}
         </div>
         <br/>
 		    </div>
