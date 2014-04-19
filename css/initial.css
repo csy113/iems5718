@@ -4,7 +4,8 @@ div:empty:before {
               color:gray
               }
 #timeContent{
-  height: 100px;
+  display:table;
+  height: 180px;
   width: 500px; 
   padding: 20px;
   background-color: white; 
@@ -18,6 +19,10 @@ div:empty:before {
 
 /* gradients */
 
+}
+#placeHolder{
+  
+  
 }
 #userTable{
   width:10%;
@@ -65,7 +70,7 @@ body input{
 }
 .container{
   margin:0 auto;
-	width:70%;
+	width:60%;
   height: 100%;
 }
 .controls {

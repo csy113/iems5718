@@ -1,23 +1,27 @@
 var count=1;
 var coordinate='';
 var time=["","",""];
-var wrong=[0,0,0,0];
+var wrong=[1,1,1,1];
 var flag;
 var min=0;
 //var initialeventid=$('#eventid').val();
 function saveChoice(){
   var finalTime='';
   var i=0;
-  var tempId="radio"+i+"Name";
+  var tempId="";
   while(i<3){
-    if($("#"+tempId).val().length!=0){
-      if($('#'+tempId).checked)
+    tempId="radio"+i+"Name";
+    if($("#"+tempId).length){
+      if($('#'+tempId).prop('checked')){
+        alert(tempId)
         finalTime=$('#'+tempId).val();
+      }
     }
     i++;
   }
+  //alert(finalTime);
   $.ajax({
-      url:'/comments/add',
+      url:'/event/finalize',
       type:'POST',
       data:{
         finaltime:finalTime,
@@ -25,8 +29,8 @@ function saveChoice(){
       }
    });
   alert("save time successfully!");
+  window.location.href="/home"; 
 }
-
 var today='';
 function submitComment(){
   event.preventDefault();
@@ -83,62 +87,20 @@ function setTime() {
   //showTime=timeArray[0]+" "+timeArray[1];
 	var divIdName;
  	divIdName="my"+count+"Div";
-  $('#timeContent').append(' <div id='+divIdName+' style="font-family:courier">'+count+'. '+timeDisplay+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="#" onclick="deleteTime(\'' + divIdName + '\')">   Delete</a></div>');
+  flag=count-min;
+  $('#timeContent').append(' <div id='+divIdName+' style="font-family:courier">'+timeDisplay+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="#" onclick="deleteTime(\'' + divIdName + '\')">   Delete</a></div>');
   time[(count-1)]=timeDisplay;
   alert(time[count-1]);
   count++;
-  flag=count-min;
   
-  if(flag>=4||length>=3){
+  
+  if(flag>=3||length>=3){
   	$("#confirm_date").attr("disabled", "disabled");
     $("#datetime").attr("disabled", "disabled");
   }
 }
-var errorCheck=function(){
-  if($("#input-name").val()==""){
-        document.getElementById('wrong').innerHTML = 'You have not set the event name!';
-        $("#wrong").css('display', 'block');
-        wrong[0]=1;
-    }else{
-        wrong[0]=0;
-        $("#wrong").css('display', 'none');
-    }
-    if(wrong[0]==0){
-        if($("#introduction").val()==""){
-            document.getElementById('wrong').innerHTML = 'You have not set the introduction!';
-            $("#wrong").css('display', 'block');
-            wrong[1]=1;
-        }else{
-            wrong[1]=0;
-            $("#wrong").css('display', 'none');
-        }
-    }
-    if(wrong[1]==0){
-    //alert(typeof(time[0]));
-        if($('#timeContent').is(':empty')){
-            wrong[2]=1
-            document.getElementById('wrong').innerHTML = 'You have not set the time!';
-            $("#wrong").css('display', 'block');
-        }else{
-            wrong[2]=0;
-            $("#wrong").css('display', 'none');
-        }
-    }
-    if(wrong[2]==0){
-        if($('#pac-input').val()==""){
-            document.getElementById('wrong').innerHTML = 'You have not set the location!';
-            $("#wrong").css('display', 'block');
-            wrong[3]=1;
-        }else{
-            wrong[3]=0;
-            $("#wrong").css('display', 'none');
-        }
-    }
-}
 function submitForm(){
     //alert(typeof($("#input-name").val()));
-    
-    
     if(wrong[0]==0&&wrong[1]==0&&wrong[2]==0&&wrong[3]==0){
        $("#wrong").css('display', 'none');
 
@@ -155,8 +117,8 @@ function submitForm(){
           eventid:$('#eventid').val(),
         }
       });
-      $('#submitModal').modal('show')
-      //alert('Successfully create this event!');
+      
+      alert('Successfully create this event!');
       $("#submitEvent").attr("disabled", "disabled");
      // jConfirm('Successfully initial this event!', 'Confirmation Dialog', function() {
       window.location.href="/home"; 
@@ -165,15 +127,76 @@ function submitForm(){
    }
  
 }
+function errorCheck(){
+  
+  if($("#input-name").val()==""){
+    alert(wrong);
+        document.getElementById('wrong').innerHTML = 'You have not set the event name!';
+        $("#wrong").css('display', 'block');
+       // wrong[0]=1;
+    }else{
+        wrong[0]=0;
+        $("#wrong").css('display', 'none');
+    }
+    if(wrong[0]==0){
+        if($("#introduction").val()==""){
+            document.getElementById('wrong').innerHTML = 'You have not set the introduction!';
+            $("#wrong").css('display', 'block');
+           // wrong[1]=1;
+        }else{
+            wrong[1]=0;
+            $("#wrong").css('display', 'none');
+        }
+    }
+    if(wrong[1]==0){
+    //alert(typeof(time[0]));
+        if($('#timeContent').is(':empty')){
+            //wrong[2]=1
+            document.getElementById('wrong').innerHTML = 'You have not set the time!';
+            $("#wrong").css('display', 'block');
+        }else{
+            wrong[2]=0;
+            $("#wrong").css('display', 'none');
+        }
+    }
+    if(wrong[2]==0){
+        if($('#pac-input').val()==""){
+            document.getElementById('wrong').innerHTML = 'You have not set the location!';
+            $("#wrong").css('display', 'block');
+            //wrong[3]=1;
+        }else{
+            wrong[3]=0;
+            $("#wrong").css('display', 'none');
+        }
+    }
+    if(wrong[0]==0&&wrong[1]==0&&wrong[2]==0&&wrong[3]==0){
+      $('#submitModal').modal('show');
+      //submitForm();
+    }
+}
+
 
 $(document).ready(function() {
   //alert(length);
+  if($("#datetime").val().length==0)
+    $("#confirm_date").attr("disabled","disabled");
+  $('#datetime').blur(function()          //whenever you click off an input element
+{                   
+    if( !$(this).val() ) {                      //if it is blank. 
+      $("#confirm_date").attr("disabled","disabled");    
+    }else
+      $("#confirm_date").removeAttr("disabled");
+});
+  
+  
+  
   
   if($("#eventid").val().length!=0){
     $("#commentArea").show();
     $("#cancelEvent").show();
   }
   else{
+  //  $("#confirm_date").attr("disabled","disabled");
     $("#commentArea").hide();
     $("#cancelEvent").hide();
   }
@@ -200,8 +223,9 @@ $(document).ready(function() {
   today = year+"-"+month+"-"+day+"T"+hour+":"+minutes;
  // alert(today);
 	//$('#selector').val(today);
+  //google.maps.event.addDomListener(window, 'load', initialize);
   //$('#submitEvent').click(submitForm);
-  $('#submitEvent').click(errorCheck);
+  //$('#submitEvent').click(errorCheck);
   //$('#dateSelect').datetimepicker();
   var $j = jQuery.noConflict();
   $j("#datetime").datetimepicker();  

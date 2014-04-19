@@ -12,7 +12,7 @@
     <link href="/css/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
     
   	<link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>  
-  	<link rel="stylesheet" href="/css/initial.css" type="text/css" />
+  	
     <title>Initial an event</title>
       
     <script src="/js/bootstrap-dialog.js"></script>
@@ -29,6 +29,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=McLaren' rel='stylesheet' type='text/css'>
     <script src="/js/jquery.datetimepicker.js"></script>
+    <link rel="stylesheet" href="/css/initial.css" type="text/css" />
   </head>
 
   <body>
@@ -43,7 +44,7 @@
     </script>
     
     <div id="header">  
-      <span style="float:left;margin-left:16%;">Event World! Fly your event!</span>
+      <span style="float:left;margin-left:18%;">Event World! Fly your event!</span>
       <div id="headertext">
         <span>Welcome, {{user}}!</span>
         &nbsp;&nbsp;&nbsp;
@@ -85,11 +86,13 @@
         <input type="text" id="length" style="display:none" value="{{length}}"/>
         <input type="text" id="eventid" style="display:none" value="{{eventid}}"/>
         
-        <div calss="border-bottom-radius" id="timeContent" contentEditable="true" data-placeholder="My Placeholder String">
-
+        <div calss="border-bottom-radius" id="timeContent" data-placeholder="My Placeholder String">
+          <div id="placeHolder"><u><i>Chosen time shown here</i></u></div>
+          <br/>
           {% for i in range (0, length) %}
           <div style="font-family:courier"><span>{{i+1}}. {{datelist[i]}} </span> &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span></div> <br/>
 				   {% endfor %}
+
         </div>
         <br/>
 		    </div>
@@ -183,11 +186,11 @@
           </table>
         </div>
     
-    <button class="btn btn-primary" id="submitEvent">Submit the Event</button>
+    <button class="btn btn-primary"  onclick="errorCheck()">Submit the Event</button>
 		&nbsp;&nbsp;&nbsp;
 		<button type="button" class="btn btn-primary" onclick="{location.href='/home'}">Back to main page</button>
     &nbsp;&nbsp;&nbsp;
-    <button class="btn btn-primary" data-toggle="modal" data-target="#cancelModal" id="cancelEvent" >Cancel Event</button>   
+    <button class="btn btn-danger" data-toggle="modal" data-target="#cancelModal" id="cancelEvent" >Cancel Event</button>   
     &nbsp;&nbsp;&nbsp;
     <button class="btn btn-primary" data-toggle="modal" data-target="#finalizeModal">Finalize event</button>
     
@@ -217,9 +220,14 @@
         <h4 class="modal-title" id="myModalLabel">Event's Time Information (please make only one choice):</h4>
       </div>
       <div class="modal-body">
+        <form>
           {% for i in range (0, length) %}
-           <input type="radio" id="radio{{i}}Name" value='{{datelist[i]}}'/>&nbsp;&nbsp;&nbsp; {{datelist[i]}}   &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span><br/>
-				  {% endfor %}
+
+             
+            <input type="radio" id="radio{{i}}Name" name="time" value='{{datelist[i]}}'/>&nbsp;&nbsp;&nbsp; {{datelist[i]}}   &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span><br/>
+            
+        {% endfor %}
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -238,7 +246,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Event's Time Information (please make only one choice):</h4>
+        <h4 class="modal-title" id="myModalLabel">Successful message:</h4>
       </div>
       <div class="modal-body">
           Your event has been well created!
@@ -260,7 +268,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Event's Time Information (please make only one choice):</h4>
+        <h4 class="modal-title" id="myModalLabel">Confirmation message:</h4>
       </div>
       <div class="modal-body">
           Are you really sure to cancel it?

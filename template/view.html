@@ -64,6 +64,11 @@
         <br/>
         <input type="text" style="display:none" value="{{eventid}}" id="eventId"/>
         <div style="display:none" id="userid">{{userid}}</div>
+        {% if finalized %}
+        <span>finalizedtime:{{finalizedtime}}</span>
+            {% else %}
+              
+				    {% endif %} 
         <div style="font-size:20px;font-family: 'Roboto, sans-serif', cursive;" id="timeContent">
            {% for i in range (0, length) %}
             {% if chosenlist[i]==1 %}

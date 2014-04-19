@@ -68,16 +68,19 @@
 			  <table class="table" width="100%" id="page">
 				  <thead>
 					<tr class="active">
-					  <th>Title</th><th>Time</th><th>Location</th>
+					  <th>Title</th><th>Time with most votes</th><th>Location</th>
 					</tr>
 				  </thead>
 				  <tbody id="eventContent">
+            
 				  {% for eventObject in eventlist %}
-            {% if eventObject[4] %}
-            <tr><td><s>{{eventObject[0]}}</s></td><td><s>{{eventObject[2]}}</s></td><td><s>{{eventObject[1]}}</s></td></tr>
+            {{eventObject[5]}}
+            {% if eventObject[5] %}
+            <tr><td><a style="color:red;" href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}}</a></td><td>{{eventObject[2]}}</td><td>{{eventObject[1]}}</td></tr>
             {% else %}
-            <tr><td><a href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}}</a></td><td>{{eventObject[2]}}</td><td>{{eventObject[1]}}</td></tr>
+            <tr><td><a href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}}</a></td><td>{{eventObject[2]}}</td><td>{{eventObject[1]}}</td></tr>  
             {% endif %}
+            
 				  {% endfor %}
 				</tbody>
 				
