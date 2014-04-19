@@ -18,6 +18,8 @@ class Event(ndb.Model):
 	cancelTime = ndb.DateTimeProperty()
 	createTime = ndb.DateTimeProperty(auto_now_add=True)
 	lastModifiedTime = ndb.DateTimeProperty(auto_now=True)
+	finalized = ndb.BooleanProperty()
+	finaltime = ndb.DateTimeProperty()
 
 class EventVote(ndb.Model):
 	userid = ndb.StringProperty()
@@ -36,6 +38,7 @@ def addEvent(ownerid, name, summary, my1Time, my2Time, my3Time, location,
 		if eventid == '':
 			event = Event()
 			event.cancelled=False
+			event.finalized=False
 		else:
 			event = ndb.Key('Event', int(eventid)).get()
 		event.ownerid = ownerid
@@ -56,6 +59,11 @@ def cancelEvent(eventid):
 		event.cancelled = True
 		event.cancelTime = getTimeNow()
 		event.put()
+
+def finalizeEvent(eventid, finaltime):
+	event = ndb.Key('Event', int(eventid)).get()
+	event.finalized=True
+	event.finaltime=str2datetime(finaltime)
 
 def voteEvent(eventid, userid, voteList):
 	parentkey = ndb.Key('Event', int(eventid))
@@ -111,7 +119,8 @@ def _fetchEventList(query):
 	eventlist = []
 	for event in result:
 		eventlist.append([event.name, event.location,
-			datetime2str(event.my1Time), event.key.id(), event.cancelled])
+			datetime2str(event.my1Time), event.key.id(), event.cancelled,
+			event.finalized])
 		logging.info(event)
 	return eventlist
 
@@ -139,7 +148,8 @@ def getEventListByVoter(voterUserID):
 	for eventvote in result:
 		event = eventvote.key.parent().get()
 		eventlist.append([event.name, event.location,
-			datetime2str(event.my1Time), event.key.id(), event.cancelled])
+			datetime2str(event.my1Time), event.key.id(), event.cancelled,
+			event.finalized])
 		logging.info(event)
 	return eventlist
 
