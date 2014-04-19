@@ -150,8 +150,8 @@ body input{
         font-weight: 300;
       }
 	  #map-canvas  {
-	    width:800px;
-		height:500px;
+	    width:600px;
+		height:300px;
 	  }
 }
 

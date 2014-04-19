@@ -44,7 +44,7 @@
     </script>
     
     <div id="header">  
-      <span style="float:left;margin-left:18%;">Event World! Fly your event!</span>
+      <span style="float:left;margin-left:21%;">Event World! Fly your event!</span>
       <div id="headertext">
         <span>Welcome, {{user}}!</span>
         &nbsp;&nbsp;&nbsp;
@@ -167,15 +167,16 @@
                         </script>
     			
     		</div>
-        
+        <br/>
+      <br/>
         <div id="wrong" style="display:none;color:red;">wrong!</div>
 
         <div id="commentArea" style="display:none"> 
           <div id="commentwrong" style="display:none;color:red;">You should type something to comment!</div>
           <label for="exampleInputEmail1">Make some comments here.</label>
-          <div class="input-group" style="width:80%">
-            <input type="text" id="commentContent" size="16" class="form-control"  placeholder="Enter comments"/>
-            <span class="input-group-btn"><button type="button" class="btn btn-default" onclick="submitComment()" align=right>Submit Comment</button></span>
+          <div class="input-group" style="width:75%">
+            <input type="text" id="commentContent"  class="form-control"  placeholder="Enter comments"/>
+            <span class="input-group-btn"><button type="button" class="btn btn-primary" onclick="submitComment()" align=right>Submit Comment</button></span>
   	      </div>
           
           <table class="table" id="commentTable" style="width:80%">
@@ -185,14 +186,15 @@
             <input id="userName" style="display:none;" value="{{user}}"/>   
           </table>
         </div>
-    
+      <br/>
+      <br/>
     <button class="btn btn-primary"  onclick="errorCheck()">Submit the Event</button>
 		&nbsp;&nbsp;&nbsp;
 		<button type="button" class="btn btn-primary" onclick="{location.href='/home'}">Back to main page</button>
     &nbsp;&nbsp;&nbsp;
     <button class="btn btn-danger" data-toggle="modal" data-target="#cancelModal" id="cancelEvent" >Cancel Event</button>   
     &nbsp;&nbsp;&nbsp;
-    <button class="btn btn-primary" data-toggle="modal" data-target="#finalizeModal">Finalize event</button>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#finalizeModal" id="finalizeevent">Finalize event</button>
     
     </div>
     

@@ -13,10 +13,11 @@ function saveChoice(){
     tempId="radio"+i+"Name";
     if($("#"+tempId).length){
       if($('#'+tempId).prop('checked')){
-        alert(tempId)
+       // alert(tempId)
         finalTime=$('#'+tempId).val();
       }
     }
+
     i++;
   }
   //alert(finalTime);
@@ -45,7 +46,7 @@ function submitComment(){
   else{
     $('#commentTable').prepend('<tr><td><span style="color:blue">'+userName+'</span>: '+escape(comment)+' </td><td>'+tempTime+'</td></tr>');
 	  //$('#commentTable tr:first').after('<tr></tr>');
-    $('#commentContent').removeAttr('value');
+    $('#commentContent').val('');
     $.ajax({
       url:'/comments/add',
       type:'POST',
@@ -181,12 +182,12 @@ $(document).ready(function() {
   if($("#datetime").val().length==0)
     $("#confirm_date").attr("disabled","disabled");
   $('#datetime').blur(function()          //whenever you click off an input element
-{                   
+    {                   
     if( !$(this).val() ) {                      //if it is blank. 
       $("#confirm_date").attr("disabled","disabled");    
     }else
       $("#confirm_date").removeAttr("disabled");
-});
+   });
   
   
   
@@ -194,15 +195,18 @@ $(document).ready(function() {
   if($("#eventid").val().length!=0){
     $("#commentArea").show();
     $("#cancelEvent").show();
+    $("#finalizeevent").show();
   }
   else{
   //  $("#confirm_date").attr("disabled","disabled");
     $("#commentArea").hide();
     $("#cancelEvent").hide();
+    $("#finalizeevent").hide();
   }
   var votelength=$("#length").val();
   //if(votelength>=3){
   if($("#eventid").val().length!=0){
+    
   	$("#confirm_date").attr("disabled", "disabled");
     $("#datetime").attr("disabled", "disabled");
   }
