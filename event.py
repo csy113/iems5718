@@ -107,7 +107,7 @@ class ViewEvent(webapp2.RequestHandler):
       'userid':users.get_current_user().user_id(),
 			'joineduserlist': joineduserlist,
 			'finalized':event.finalized,
-			'finalizedtime':event.finalizedtime
+			'finalizedtime':event.finaltime
 		}
 		if event.ownerid == user.user_id():
 			template = JINJA_ENVIRONMENT.get_template('/template/initial.html')
@@ -123,8 +123,8 @@ class EditEvent(webapp2.RequestHandler):
 		template_values = {
 			'logoutlink' : logoutlink,
 			'user': user,
-			'lat': 22.396428,
-			'long': 114.109497,
+			'lat': 22.413533,
+			'long': 114.21031,
 			'userlist' : userlist,
       'length':0
 		}
