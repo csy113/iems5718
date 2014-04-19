@@ -72,7 +72,7 @@ class SubmitFinalize(webapp2.RequestHandler):
 	def post(self):
 		eventid = self.request.get('eventid')
 		finaltime = self.request.get('finaltime')
-		finalizeEvent()
+		event_func.finalizeEvent(int(eventid), finaltime)
 		
 
 def listCountNonNone(list):

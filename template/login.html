@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+		<link href="./bootstrap.css" rel="stylesheet"/> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>      
+		<script src="./bootstrap.js"></script>
+		<script src="./jquery-1.10.2.js"></script>
+		<script src="./jquery1.8.3.js"></script>
+<script src="./bootstrap-tooltip.js"></script>
+<script src="./bootstrap-popover.js"></script>
+		<script src="./bootstrap-dialog.js"></script>
+	<style type="text/css">
+		body{
+			background-image:url(pic.jpg);
+		}
+	</style>
+	<style type="text/css">
+  		#footer {
+    	
+    	
+    	color:white;
+
+  		}
+  		#signin{
+  			text-align:center;
+  			margin: 0 auto;
+  		}
+	</style>
+	<script>  
+$(function ()  
+{ 
+	$("#user1").popover({trigger:'click',placement:'left',html:true,content:"Enjoy the web-app!"}); 
+	$("#user2").popover({trigger:'click',placement:'top',html:true,content:"Enjoy the web-app!"}); 
+	$("#user3").popover({trigger:'click',placement:'right',html:true,content:"Enjoy the web-app!"});  
+});  
+</script>
+
+</header>
+
+<body>
+<br/>
+<br/>
+	   
+
+	<h1 style="color:white;text-align:center">Welcome to Event World!</h1>
+	<br/><br/>
+	<div class="jumbotron" style="width:60%;height:50%; margin:0 auto;border-radius:25px;">
+  		<h1 style="font-size:24px;">Login with your Google Account!</h1>
+  		<p>...</p>
+  		<p align=right>
+  		<a href="#" id="user1" class="btn btn-danger" >WANG WEI</a>
+  		<a href="#" id="user2" class="btn btn-danger" >SHING YEE</a>
+  		<a href="#" id="user3" class="btn btn-danger" >SUNNY</a>
+		
+		</p>
+
+	</div>
+	
+	<br/>
+	<br/>
+	<div id="signin">
+		<button type="button" class="btn btn-primary btn-lg">Sign in</button>
+	</div>
+	<br/>
+	<br/>
+		
+	<center>
+	
+	<footer  id="footer">Copyright 2014 IEMS5718-Group13. All rights reserved.</footer></center>
+	
+</body>
+</html>
