@@ -48,8 +48,10 @@ def addEvent(ownerid, name, summary, my1Time, my2Time, my3Time, location,
 		event.my2Time=str2datetime(my2Time)
 		event.my3Time=str2datetime(my3Time)
 		event.location=location
-		event.lagitude=lagitude
-		event.longitude=longitude
+		if lagitude is not None:
+			event.lagitude=lagitude
+		if longitude is not None:
+			event.longitude=longitude
 		key = event.put()
 		logging.info('Event added with key %s' % key)
 
