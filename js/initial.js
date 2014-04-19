@@ -133,7 +133,7 @@ function submitForm(){
 function errorCheck(){
   
   if($("#input-name").val()==""){
-    alert(wrong);
+   // alert(wrong);
         document.getElementById('wrong').innerHTML = 'You have not set the event name!';
         $("#wrong").css('display', 'block');
        // wrong[0]=1;

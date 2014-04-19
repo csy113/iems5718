@@ -56,7 +56,7 @@ function submitComment(){
   if($('#commentContent').val()=="")
     $("#wrong").css('display', 'block');
   else{
-    $('#commentTable').prepend('<tr><td><span style="color:blue">'+userName+'</span>: '+comment+' </td><td>'+commentTime+'</td></tr>');
+    $('#commentTable').prepend('<tr><td><span style="color:blue">'+userName+'</span>: '+escape(comment)+' </td><td>'+commentTime+'</td></tr>');
     $('#commentContent').val('');
 	  //$('#commentTable tr:first').after('<tr></tr>');
     $.ajax({
