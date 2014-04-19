@@ -120,7 +120,6 @@ class EditEvent(webapp2.RequestHandler):
 		user = user_func.getCurrentUser(self)
 		userlist = user_func.getUserNameList()
 		logoutlink = users.create_logout_url('/')
-
 		template_values = {
 			'logoutlink' : logoutlink,
 			'user': user,
