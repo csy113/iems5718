@@ -29,7 +29,7 @@ function saveChoice(){
         eventid:$('#eventid').val(),
       }
    });
-  alert("save time successfully!");
+  //alert("save time successfully!");
   window.location.href="/home"; 
 }
 var today='';
@@ -44,14 +44,15 @@ function submitComment(){
   if($('#commentContent').val()=="")
     $("#commentwrong").css('display', 'block');
   else{
-    $('#commentTable').prepend('<tr><td><span style="color:blue">'+userName+'</span>: '+escape(comment)+' </td><td>'+tempTime+'</td></tr>');
+    $('#commentTable').prepend('<tr><td><span style="color:blue">'+userName+'</span>: '+comment+' </td><td>'+tempTime+'</td></tr>');
 	  //$('#commentTable tr:first').after('<tr></tr>');
     $('#commentContent').val('');
+    //alert(comment);
     $.ajax({
       url:'/comments/add',
       type:'POST',
       data:{
-        comment:$('#commentContent').val(),
+        comment:comment,
         eventid:$('#eventid').val(),
       }
     });
@@ -181,6 +182,7 @@ function errorCheck(){
 
 $(document).ready(function() {
   //alert(length);
+  
   if($("#datetime").val().length==0)
     $("#confirm_date").attr("disabled","disabled");
   $('#datetime').blur(function()          //whenever you click off an input element

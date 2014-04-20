@@ -20,7 +20,6 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>	
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbYzvg0aGCPVxWr7x7ou13ObTbq-roTiA&sensor=false&libraries=places"></script>      
-
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     
 
@@ -55,7 +54,11 @@
     </div>
     
     <div class="container">
+    {% if eventid %}
+      <h1 id="title">Review the Event</h1>
+    {% else %}
   	<h1 id="title">Initial an Event</h1>
+    {% endif %}
       <hr>
       <br/>
     	
@@ -189,7 +192,7 @@
             <input type="text" id="commentContent"  class="form-control"  placeholder="Enter comments"/>
             <span class="input-group-btn"><button type="button" class="btn btn-success" onclick="submitComment()" align=right>Submit Comment</button></span>
   	      </div>
-          
+         
           <table class="table" id="commentTable" style="width:75%">
             {% for comment in commentlist %}
             <tr><td><span style="color:blue">{{comment[0]}}</span>: {{comment[1]}}</td><td>{{comment[2]}}</td></tr>
@@ -199,28 +202,37 @@
         </div>
       <br/>
       <br/>
-    <button class="btn btn-primary"  onclick="errorCheck()">Submit the Event</button>
+    <button class="btn btn-primary"  onclick="errorCheck()">
+      {% if eventid %}
+      Save Changes
+      {% else %}
+      Submit Event
+      {% endif %}
+      </button>
 		&nbsp;&nbsp;&nbsp;
 		<button type="button" class="btn btn-primary" onclick="{location.href='/home'}">Back to main page</button>
     &nbsp;&nbsp;&nbsp;
     <button class="btn btn-danger" data-toggle="modal" data-target="#cancelModal" id="cancelEvent" >Cancel Event</button>   
     &nbsp;&nbsp;&nbsp;
+    {% if finalized%}
+    {% else %}
     <button class="btn btn-primary" data-toggle="modal" data-target="#finalizeModal" id="finalizeevent">Finalize event</button>
-    
+    {% endif %}
     </div>
     
     <table id="userTable" class="table" >
 				<thead>
 					<tr class="active">
-						<th align=center>My Circle</th>
+						<th align=center>Current joined users</th>
 					</tr>
 				</thead>
         <tbody>
-				{% for user in userlist %}
-        		<tr><td>{{user}}</td></tr>
+				{% for user in joineduserlist %}
+        		<tr><td>{{user.name}}</td></tr>
 				{% endfor %}
         </tbody>
 	  </table>
+    
     
 
 

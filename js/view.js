@@ -56,27 +56,32 @@ function submitComment(){
   if($('#commentContent').val()=="")
     $("#wrong").css('display', 'block');
   else{
-    $('#commentTable').prepend('<tr><td><span style="color:blue">'+userName+'</span>: '+escape(comment)+' </td><td>'+commentTime+'</td></tr>');
+    $('#commentTable').prepend('<tr><td><span style="color:blue">'+userName+'</span>: '+comment+' </td><td>'+commentTime+'</td></tr>');
     $('#commentContent').val('');
 	  //$('#commentTable tr:first').after('<tr></tr>');
     $.ajax({
       url:'/comments/add',
       type:'POST',
       data:{
-        comment:$('#commentContent').val(),
+        comment:comment,
         eventid:$("#eventId").val(),
       }
     });
   }
   //alert("Comments made!");
 } 
-
+//window.location.reload();
 function joinEvent(){
   saveVote();
   var firstVote=chosenList[0];
   var secVote=chosenList[1];
   var thirdVote=chosenList[2];
+  //$('#joinAlert').modal('show');
+  if((firstVote==0)&&(secVote==0)&&(thirdVote==0))
+    $('#joinAlert').modal('show');
+    //alert("Please make votes of the time before you join!");
   //alert(chosenList);
+  else{
   $.ajax({
     		url: "/event/submitvote", 
  				type: "POST",
@@ -87,24 +92,19 @@ function joinEvent(){
           eventid:$("#eventId").val(),
         }
       });
-  
   //jConfirm('Successfully join this event!', 'Confirmation Dialog', function() {
-    //window.location.href="/home"; 
+  //window.location.href="/home"; 
   //});
-  
   //jAlert('Successfully join this event!');
   //bootbox.alert("Successfully join this event!");
   //$('#dialog-message').modal('toggle'); 
-  
   //myalert("Test", "This is a test modal dialog");
- 
-  
- //alert("Join this event successfully!");
+  //alert("Join this event successfully!");
+  $('#joinModal').modal('show');
   $("#join").attr("disabled", "disabled");
-  window.location.reload();
   //$('#joinModal').modal('toggle');
-  //
-      //alert(chosenList);
+  //alert(chosenList);
+  }
 }
 $(document).ready(function() {
 

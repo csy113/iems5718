@@ -4,7 +4,6 @@
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <script src="/js/jquery.js" type="text/javascript"></script>
-
     <script type="text/javascript" src="/js/bootstrap.js"></script>
     <script src="/js/jquery.ui.draggable.js" type="text/javascript"></script>
     <script src="/js/jquery.alerts.js" type="text/javascript"></script>
@@ -16,7 +15,6 @@
   	<link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>  
   	<link rel="stylesheet" href="/css/view.css" type="text/css" />
     <title>Check Event</title>
-    <script type="text/javascript" src="/js/jquery.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbYzvg0aGCPVxWr7x7ou13ObTbq-roTiA&sensor=false&libraries=places"></script>
 	  <script src="/js/bootstrap-dialog.js"></script>
     <script src="/js/bootbox.js"></script>
@@ -134,10 +132,13 @@
 				    {% endfor %}  
             <input id="userName" style="display:none;" value="{{user}}"/>
           </table>
-
-      <button class="btn btn-primary" id="join" data-toggle="modal" data-target="#joinModal"  >Join Event</button>
+      {% if finalized %}
+        <button type="button" class="btn btn-primary" onclick="{location.href='/home'}">Back to main page</button>
+      {% else %}
+        <button class="btn btn-primary" id="join" data-toggle="modal"  onclick="joinEvent()" >Join Event</button>
 			  &nbsp;&nbsp;&nbsp;
 			  <button type="button" class="btn btn-primary" onclick="{location.href='/home'}">Back to main page</button>
+      {% endif %}
 			<br/>
 			<br/>		
     </div>
@@ -167,12 +168,35 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="joinEvent()" data-dismiss="modal">OK</button>
+        <button type="button" class="btn btn-primary"  onclick="window.location.reload()">OK</button>
       </div>
     </div>
   </div>
 </div>
 
+    
+<div class="modal fade" id="joinAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Reminder message:</h4>
+      </div>
+      <div class="modal-body">
+        Please make votes for the time before you join!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="refresh()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>    
+    
+    
+    
+    
+ 
 
     
     <footer align=center>© 2014 IEMS5718-Group13. All rights reserved.</footer>
