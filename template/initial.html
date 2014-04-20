@@ -100,7 +100,7 @@
           <div id="placeHolder"><u><i>Chosen time shown here</i></u></div>
           <br/>
           {% if finalized %}
-          <div style="font-family:courier"><span>{{finalizedtime}}</span></div>
+          <div style="font-family:courier"><span>Finalized Time: {{finalizedtime}}</span></div>
           {% else %}
             {% for i in range (0, length) %}
               <div style="font-family:courier"><span>{{i+1}}. {{datelist[i]}} </span> &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span></div> <br/>
@@ -201,14 +201,17 @@
         </div>
       <br/>
       <br/>
-    <button class="btn btn-primary"  onclick="errorCheck()">
-      {% if eventid %}
-      Save Changes
+      {% if finalized %}
       {% else %}
-      Submit Event
+        <button class="btn btn-primary"  onclick="errorCheck()">
+          {% if eventid %}
+            Save Changes
+          {% else %}
+            Submit Event
+          {% endif %}
+        </button>
+		    &nbsp;&nbsp;&nbsp;
       {% endif %}
-      </button>
-		&nbsp;&nbsp;&nbsp;
 		<button type="button" class="btn btn-primary" onclick="{location.href='/home'}">Back to main page</button>
     &nbsp;&nbsp;&nbsp;
     <button class="btn btn-danger" data-toggle="modal" data-target="#cancelModal" id="cancelEvent" >Cancel Event</button>   
@@ -273,7 +276,7 @@
         <h4 class="modal-title" id="myModalLabel">Successful message:</h4>
       </div>
       <div class="modal-body">
-          Your event has been well created!
+          Your event has been well submitted!
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
