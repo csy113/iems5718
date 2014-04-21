@@ -108,6 +108,7 @@ function setTime() {
  	divIdName="my"+count+"Div";
   flag=count-min;
   $('#timeContent').append(' <div id='+divIdName+' style="font-family:courier">'+timeSlot+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="#" onclick="deleteTime(\'' + divIdName + '\')">   Delete</a></div>');
+  $("#datetime").val('');
   time[(count-1)]=timeSlot;
   //alert(time[count-1]);
   count++;
