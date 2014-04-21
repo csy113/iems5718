@@ -9,11 +9,6 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-#  a static file mapping
-- url: /start
-  static_files: Web_project.html
-  upload: Web_project.html
-
 # a static directory mapping
 - url: /js
   static_dir: js
@@ -23,7 +18,8 @@ handlers:
   static_dir: css
 
 - url: /
-  script: home.app
+  static_files: template/login.html
+  upload: template/login\.html
 
 - url: /event/.*
   script: event.app
