@@ -23,6 +23,12 @@ body {
   top:130px;
   left:2%;
 }
+#eventContent th{
+  vertical-align:middle;
+}
+#eventContent td{
+  vertical-align:middle;
+}
 #userTable{
   width:10%;
   height:400;

@@ -70,7 +70,7 @@
 <table class="table" width="100%" id="page">
 				  <thead>
 					<tr class="active">
-            <th style="width:30%;text-align:center">Event Name</th><th style="width:40%;text-align:center">Time with most votes</th><th style="width:30%;text-align:center">Location</th>
+            <th style="width:25%;text-align:center">Event Name</th><th style="width:25%;text-align:center">Organizer</th><th style="width:25%;text-align:center">Time with most votes</th><th style="width:25%;text-align:center">Location</th>
 					</tr>
 				  </thead>
 				  <tbody id="eventContent" style="font-family: 'Balthazar', serif;font-size:16px">
@@ -78,12 +78,12 @@
 				  {% for eventObject in eventlist %}
             
             {% if eventObject[4] %}
-            <tr style="color:gray;"><td style="width:30%;text-align:center"><s>{{eventObject[0]}}</s></td><td style="width:40%;text-align:center"><s>{{eventObject[2]}}</s></td><td style="width:30%;text-align:center"><s>{{eventObject[1]}}</s></td></tr>
+            <tr style="color:gray;"><td style="width:25%;text-align:center"><s>{{eventObject[0]}}</s></td><td style="width:25%;text-align:center"><s>{{Owner}}</s></td><td style="width:25%;text-align:center"><s>{{eventObject[2]}}</s></td><td style="width:30%;text-align:center"><s>{{eventObject[1]}}</s></td></tr>
             {% else %}
               {% if eventObject[5] %}
-                <tr style="color:red;"><td style="width:30%;text-align:center"><a style="color:red;" href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}} (Finalized!)</a></td><td style="width:40%;text-align:center">{{eventObject[2]}} (Finalized)</td><td style="width:30%;text-align:center">{{eventObject[1]}} (Finalized!)</td></tr>
+            <tr style="color:red;"><td style="width:25%;text-align:center"><a style="color:red;" href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}} (Finalized!)</a></td><td style="width:25%;text-align:center">{{Owner}}</td><td style="width:25%;text-align:center">{{eventObject[2]}} (Finalized)</td><td style="width:25%;text-align:center">{{eventObject[1]}} (Finalized!)</td></tr>
               {% else %}
-                <tr><td style="width:30%;text-align:center"><a href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}}</a></td><td style="width:40%;text-align:center">{{eventObject[2]}}</td><td style="width:30%;text-align:center">{{eventObject[1]}}</td></tr>
+            <tr><td style="width:25%;text-align:center"><a href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}}</a></td><td style="width:25%;text-align:center">{{Owner}}</td><td style="width:25%;text-align:center">{{eventObject[2]}}</td><td style="width:25%;text-align:center">{{eventObject[1]}}</td></tr>
               {% endif %}
             {% endif %}
             

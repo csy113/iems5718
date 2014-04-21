@@ -16,6 +16,12 @@ body {
 #headertext{
   margin-right:5%;
 }
+#eventContent th{
+  vertical-align:middle;
+}
+#eventContent td{
+  vertical-align:middle;
+}
 #date{
   position:absolute;
   text-align:left;

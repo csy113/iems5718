@@ -47,7 +47,7 @@
     <br/>
 	  <div class="form-group">
       <label for="exampleInputEmail1" style="font-size:24px;font-family: 'Racing Sans One', cursive;border-bottom: 1px solid #000;">
-        1. Event's name
+        1. Event's name {{ownername}}
         
       </label>  
       <br/>
@@ -68,20 +68,22 @@
     		<label for="exampleInputEmail1" style="font-size:24px;font-family: 'Racing Sans One', cursive;border-bottom: 1px solid #000;">3. Event's time</label>
         <br/>
         <input type="text" style="display:none" value="{{eventid}}" id="eventId"/>
+        <input type="text" style="display:none" value="{{ownername}}" id="ownnername"/>
         <div style="display:none" id="userid">{{userid}}</div>
        
         <div style="font-size:20px;font-family: 'Roboto, sans-serif', cursive;" id="timeContent">
           {% if finalized %}
-          <br/>
-          <div style="color:red;">The time of this event is finalized as below:</div>
-          <br/>
-          <div style="color:red;">{{finalizedtime}}</div>
+            <br/>
+            <div style="color:red;">The time of this event is finalized as below:</div>
+            <br/>
+            <div style="color:red;">{{finalizedtime}}</div>
           {% else %}
+          {{length}}
             {% for i in range (0, length) %}
               {% if chosenlist[i]==1 %}
-              <input type="checkbox" checked="checked" id="radio{{i}}Name"/> {{datelist[i]}}  &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span><br/>
+                <input type="checkbox" checked="checked" id="radio{{i}}Name"/> {{datelist[i]}}  &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span><br/>
               {% else %}
-              <input type="checkbox"  id="radio{{i}}Name"/> {{datelist[i]}}  &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span><br/>
+                <input type="checkbox"  id="radio{{i}}Name"/> {{datelist[i]}}  &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span><br/>
 				      {% endif %} 
             {% endfor %}  
           {% endif %} 

@@ -4,6 +4,12 @@
 body {
   background:url(../images/twitter.jpg);
 }
+#eventContent th{
+  vertical-align:middle;
+}
+#eventContent td{
+  vertical-align:middle;
+}
 #header{
   background:white;
   height:30px;
