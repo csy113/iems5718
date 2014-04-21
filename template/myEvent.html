@@ -78,7 +78,7 @@
 				  {% for eventObject in eventlist %}
             
             {% if eventObject[4] %}
-            <tr style="color:gray;"><td><s>{{eventObject[0]}}</s></td><td style="width:30%;text-align:center"><s>{{eventObject[2]}}</s></td><td style="width:30%;text-align:center"><s>{{eventObject[1]}}</s></td></tr>
+            <tr style="color:gray;"><td style="width:30%;text-align:center;"><s>{{eventObject[0]}}</s></td><td style="width:40%;text-align:center"><s>{{eventObject[2]}}</s></td><td style="width:30%;text-align:center"><s>{{eventObject[1]}}</s></td></tr>
             {% else %}
               {% if eventObject[5] %}
                 <tr style="color:red;"><td style="width:30%;text-align:center"><a style="color:red;" href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}} (Finalized!)</a></td><td style="width:40%;text-align:center">{{eventObject[2]}} (Finalized)</td><td style="width:30%;text-align:center">{{eventObject[1]}} (Finalized!)</td></tr>

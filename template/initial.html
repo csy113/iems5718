@@ -249,10 +249,7 @@
       <div class="modal-body">
         <form>
           {% for i in range (0, length) %}
-
-             
-            <input type="radio" id="radio{{i}}Name" name="time" value='{{datelist[i]}}'/>&nbsp;&nbsp;&nbsp; {{datelist[i]}}   &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span><br/>
-            
+            <input type="radio" id="radio{{i}}Name" name="time" value='{{datelist[i]}}'/>&nbsp;&nbsp;&nbsp; {{datelist[i]}}   &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span><br/>            
         {% endfor %}
         </form>
       </div>

@@ -28,9 +28,11 @@ function saveChoice(){
         finaltime:finalTime,
         eventid:$('#eventid').val(),
       }
-   });
+   }).done(function(data) {
+         endSubmit();   
+       });
   //alert("save time successfully!");
-  window.location.href="/home"; 
+  //window.location.href="/home"; 
 }
 var today='';
 function submitComment(){
@@ -75,15 +77,28 @@ function cancel(){
     data:{
       eventid:$('#eventid').val(),
     }
-  });
+  }).done(function(data) {
+         endSubmit();   
+       });
  // alert("Cancel event!");
       //jConfirm('Your event has been cancelled!', 'Confirmation Dialog', function() {
-      window.location.href="/home"; 
+     // window.location.href="/home"; 
       //});
 }
 function setTime() {
 	event.preventDefault();
   var timeDisplay=$('#datetime').val();
+  var timeTemp=timeDisplay.split("/");
+  var yearEnd=timeTemp[0];
+  var monthEnd=timeTemp[1];
+  var dayAndTime=timeTemp[2];
+  var subArray=dayAndTime.split(" ");
+  var dayEnd=subArray[0];
+  var timeEnd=subArray[1];
+  var subSubArray=timeEnd.split(":");
+  var hourEnd=subSubArray[0];
+  var minEnd=subSubArray[1];
+  var timeSlot=yearEnd+"-"+monthEnd+"-"+dayEnd+" "+hourEnd+":"+minEnd+":00";
   //alert(test);
 	//var content=$('#selector').val();
   //var timeArray=content.split("T");
@@ -92,8 +107,8 @@ function setTime() {
 	var divIdName;
  	divIdName="my"+count+"Div";
   flag=count-min;
-  $('#timeContent').append(' <div id='+divIdName+' style="font-family:courier">'+timeDisplay+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="#" onclick="deleteTime(\'' + divIdName + '\')">   Delete</a></div>');
-  time[(count-1)]=timeDisplay;
+  $('#timeContent').append(' <div id='+divIdName+' style="font-family:courier">'+timeSlot+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="#" onclick="deleteTime(\'' + divIdName + '\')">   Delete</a></div>');
+  time[(count-1)]=timeSlot;
   //alert(time[count-1]);
   count++;
   
@@ -102,6 +117,9 @@ function setTime() {
   	$("#confirm_date").attr("disabled", "disabled");
     $("#datetime").attr("disabled", "disabled");
   }
+}
+function endSubmit(){
+  window.location.href="/home"; 
 }
 function submitForm(){
     //alert(typeof($("#input-name").val()));
@@ -133,9 +151,7 @@ function submitForm(){
   
  // });
 }
-function endSubmit(){
-  window.location.href="/home"; 
-}
+
 function errorCheck(){
   
   if($("#input-name").val()==""){
