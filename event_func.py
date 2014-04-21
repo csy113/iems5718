@@ -126,8 +126,9 @@ def _fetchEventList(query):
 	for event in result:
 		eventlist.append([event.name, event.location,
 			datetime2str(event.my1Time), event.key.id(), event.cancelled,
-			event.finalized])
-		logging.info(event)
+			event.finalized, datetime2str(event.finaltime),
+			getUserInfo(event.ownerid).name
+			])
 	return eventlist
 
 def getEventList():
@@ -155,8 +156,9 @@ def getEventListByVoter(voterUserID):
 		event = eventvote.key.parent().get()
 		eventlist.append([event.name, event.location,
 			datetime2str(event.my1Time), event.key.id(), event.cancelled,
-			event.finalized])
-		logging.info(event)
+			event.finalized, datetime2str(event.finaltime),
+			getUserInfo(event.ownerid).name
+			])
 	return eventlist
 
 def getJoinedUserList(eventid):
