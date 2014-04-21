@@ -146,7 +146,7 @@ function submitForm(){
     //  event.preventDefault();
 
       //alert('Successfully create this event!');
-      $("#submitEvent").attr("disabled", "disabled");
+      //$("#submitEvent").attr("disabled", "disabled");
      // jConfirm('Successfully initial this event!', 'Confirmation Dialog', function() {
   
   
