@@ -78,7 +78,7 @@
             <br/>
             <div style="color:red;">{{finalizedtime}}</div>
           {% else %}
-          {{length}}
+          
             {% for i in range (0, length) %}
               {% if chosenlist[i]==1 %}
                 <input type="checkbox" checked="checked" id="radio{{i}}Name"/> {{datelist[i]}}  &nbsp;&nbsp;&nbsp;<span>Number of Current Votes: {{ votelist[i]}}</span><br/>
