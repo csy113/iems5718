@@ -105,10 +105,8 @@ function setTime() {
 }
 function submitForm(){
     //alert(typeof($("#input-name").val()));
-    if(wrong[0]==0&&wrong[1]==0&&wrong[2]==0&&wrong[3]==0){
-       $("#wrong").css('display', 'none');
-
-       $.ajax({url:'/event/submit',
+/*       $.ajax({
+        url:'/event/submit',
         type:'POST',
         data: {
           name:$("#input-name").val(), 
@@ -119,16 +117,31 @@ function submitForm(){
           location:$("#pac-input").val(), 
           coordinate:coordinate,
           eventid:$('#eventid').val(),
+        },
+        error: function(XMLHttpRequest, textStatus) {
+                        alert("XMLHttpRequest.state:"+XMLHttpRequest.state+"-XMLHttpRequest.readyState:"+XMLHttpRequest.readyState+"-textStatus:"+textStatus+"-XMLHttpRequest.responseText:"+XMLHttpRequest.responseText);
         }
-      });
-      
+       });
+      */
+  $.ajax({
+    url:'/event/cancel',
+    type:'POST',
+    data:{
+      eventid:$('#eventid').val(),
+    },
+    error: function(XMLHttpRequest, textStatus) {
+                        alert("XMLHttpRequest.state:"+XMLHttpRequest.state+"-XMLHttpRequest.readyState:"+XMLHttpRequest.readyState+"-textStatus:"+textStatus+"-XMLHttpRequest.responseText:"+XMLHttpRequest.responseText);
+        }
+  });
       //alert('Successfully create this event!');
       $("#submitEvent").attr("disabled", "disabled");
      // jConfirm('Successfully initial this event!', 'Confirmation Dialog', function() {
       window.location.href="/home"; 
  // });
     
-   }
+    
+
+    
  
 }
 function errorCheck(){
