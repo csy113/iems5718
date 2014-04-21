@@ -74,9 +74,9 @@
         <div class="form-group" name="step2">
     			<label for="exampleInputEmail1" style="font-size:24px;font-family: 'McLaren', cursive;">Step2: Make some introduction here.</label>
     			{% if finalized %}
-            <input type="text" readonly="readonly" class="form-control" id="input-name" placeholder="Enter event's introduction" value="{{introduction}}"/>
+            <input type="text" readonly="readonly" class="form-control" id="introduction" placeholder="Enter event's introduction" value="{{introduction}}"/>
           {% else %}
-            <input type="text" class="form-control" id="input-name" placeholder="Enter event's introduction" value="{{introduction}}"/>
+            <input type="text" class="form-control" id="introduction" placeholder="Enter event's introduction" value="{{introduction}}"/>
           {% endif %}
   		  </div>
 		

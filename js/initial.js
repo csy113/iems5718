@@ -105,44 +105,36 @@ function setTime() {
 }
 function submitForm(){
     //alert(typeof($("#input-name").val()));
-/*       $.ajax({
+  //event.preventDefault();
+  
+       $.ajax({
         url:'/event/submit',
         type:'POST',
         data: {
           name:$("#input-name").val(), 
           introduction:$("#introduction").val(), 
-          my1Time:time[0], 
-          my2Time:time[1], 
-          my3Time:time[2], 
+          my1Time:"2014-04-21 18:00:00", 
+          my2Time:"2014-04-21 18:00:00", 
+          my3Time:"2014-04-21 18:00:00", 
           location:$("#pac-input").val(), 
           coordinate:coordinate,
-          eventid:$('#eventid').val(),
+       //   eventid:$('#eventid').val(),
         },
-        error: function(XMLHttpRequest, textStatus) {
-                        alert("XMLHttpRequest.state:"+XMLHttpRequest.state+"-XMLHttpRequest.readyState:"+XMLHttpRequest.readyState+"-textStatus:"+textStatus+"-XMLHttpRequest.responseText:"+XMLHttpRequest.responseText);
-        }
+        
+       }).done(function(data) {
+         endSubmit();   
        });
-      */
-  $.ajax({
-    url:'/event/cancel',
-    type:'POST',
-    data:{
-      eventid:$('#eventid').val(),
-    },
-    error: function(XMLHttpRequest, textStatus) {
-                        alert("XMLHttpRequest.state:"+XMLHttpRequest.state+"-XMLHttpRequest.readyState:"+XMLHttpRequest.readyState+"-textStatus:"+textStatus+"-XMLHttpRequest.responseText:"+XMLHttpRequest.responseText);
-        }
-  });
+    //  event.preventDefault();
+
       //alert('Successfully create this event!');
       $("#submitEvent").attr("disabled", "disabled");
      // jConfirm('Successfully initial this event!', 'Confirmation Dialog', function() {
-      window.location.href="/home"; 
+  
+  
  // });
-    
-    
-
-    
- 
+}
+function endSubmit(){
+  window.location.href="/home"; 
 }
 function errorCheck(){
   
