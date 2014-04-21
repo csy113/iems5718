@@ -120,12 +120,25 @@ def getEvent(event_id):
 	event = eventkey.get()
 	return event
 
+def getMostVotedTime(event):
+	votelist = getVoteNoList(event.key.id(), None)
+	maxvote = max(votelist)
+	if(votelist[2] == maxvote):
+		mostVotedTime = event.my3Time
+	if(votelist[1] == maxvote):
+		mostVotedTime = event.my2Time
+	if(votelist[0] == maxvote):
+		mostVotedTime = event.my1Time
+	return mostVotedTime
+		
+
 def _fetchEventList(query):
 	result = query.fetch()
 	eventlist = []
 	for event in result:
+		mostVotedTime = getMostVotedTime(event)
 		eventlist.append([event.name, event.location,
-			datetime2str(event.my1Time), event.key.id(), event.cancelled,
+			datetime2str(mostVotedTime), event.key.id(), event.cancelled,
 			event.finalized, datetime2str(event.finaltime),
 			getUserInfo(event.ownerid).name
 			])
@@ -154,8 +167,9 @@ def getEventListByVoter(voterUserID):
 	eventlist = []
 	for eventvote in result:
 		event = eventvote.key.parent().get()
+		mostVotedTime = getMostVotedTime(event)
 		eventlist.append([event.name, event.location,
-			datetime2str(event.my1Time), event.key.id(), event.cancelled,
+			datetime2str(mostVotedTime), event.key.id(), event.cancelled,
 			event.finalized, datetime2str(event.finaltime),
 			getUserInfo(event.ownerid).name
 			])
