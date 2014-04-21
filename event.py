@@ -96,9 +96,11 @@ class ViewEvent(webapp2.RequestHandler):
 		chosenlist = event_func.getVoteNoList(int(eventid), user.user_id()) 
 		commentlist = comment_func.getCommentList(eventid)
 		joineduserlist = event_func.getJoinedUserList(int(eventid))
+		ownername = user_func.getUserInfo(event.ownerid).name
 		template_values = {
 			'logoutlink' : logoutlink,
 			'user': user,
+			'ownername': ownername,
 			'eventname': event.name,
 			'location': event.location,
 			'introduction' : event.summary,
