@@ -78,12 +78,12 @@
 				  {% for eventObject in eventlist %}
             
             {% if eventObject[4] %}
-            <tr style="color:gray;"><td style="width:25%;text-align:center;"><s>{{eventObject[0]}}</s></td><td style="width:25%;text-align:center"><s>{{Owner}}</s></td><td style="width:25%;text-align:center"><s>{{eventObject[2]}}</s></td><td style="width:25%;text-align:center"><s>{{eventObject[1]}}</s></td></tr>
+            <tr style="color:gray;"><td style="width:25%;text-align:center;"><s>{{eventObject[0]}}</s></td><td style="width:25%;text-align:center"><s>{{eventObject[7]}}</s></td><td style="width:25%;text-align:center"><s>{{eventObject[2]}}</s></td><td style="width:25%;text-align:center"><s>{{eventObject[1]}}</s></td></tr>
             {% else %}
               {% if eventObject[5] %}
-            <tr style="color:red;"><td style="width:25%;text-align:center"><a style="color:red;" href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}} (Finalized!)</a></td><td style="width:25%;text-align:center">{{Owner}}</td><td style="width:25%;text-align:center">{{eventObject[2]}} (Finalized)</td><td style="width:25%;text-align:center">{{eventObject[1]}} (Finalized!)</td></tr>
+            <tr style="color:red;"><td style="width:25%;text-align:center"><a style="color:red;" href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}} (Finalized!)</a></td><td style="width:25%;text-align:center">{{eventObject[7]}}</td><td style="width:25%;text-align:center">{{eventObject[6]}} (Finalized)</td><td style="width:25%;text-align:center">{{eventObject[1]}} (Finalized!)</td></tr>
               {% else %}
-            <tr><td style="width:25%;text-align:center"><a href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}}</a></td><td style="width:25%;text-align:center">{{Owner}}</td><td style="width:25%;text-align:center">{{eventObject[2]}}</td><td style="width:25%;text-align:center">{{eventObject[1]}}</td></tr>
+            <tr><td style="width:25%;text-align:center"><a href="/event/view?eventid={{eventObject[3]}}">{{eventObject[0]}}</a></td><td style="width:25%;text-align:center">{{eventObject[7]}}</td><td style="width:25%;text-align:center">{{eventObject[2]}}</td><td style="width:25%;text-align:center">{{eventObject[1]}}</td></tr>
               {% endif %}
             {% endif %}
             
