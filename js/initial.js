@@ -113,12 +113,12 @@ function submitForm(){
         data: {
           name:$("#input-name").val(), 
           introduction:$("#introduction").val(), 
-          my1Time:"2014-04-21 18:00:00", 
-          my2Time:"2014-04-21 18:00:00", 
-          my3Time:"2014-04-21 18:00:00", 
+          my1Time:time[0], 
+          my2Time:time[1], 
+          my3Time:time[2], 
           location:$("#pac-input").val(), 
           coordinate:coordinate,
-       //   eventid:$('#eventid').val(),
+          eventid:$('#eventid').val(),
         },
         
        }).done(function(data) {
