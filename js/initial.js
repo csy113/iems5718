@@ -221,7 +221,8 @@ function errorCheck(){
     }
     if(wrong[1]==0){
     //alert(typeof(time[0]));
-        if($('#timeContent').is(':empty')){
+//      alert(time[0]);
+        if((time[0]=='')&&(time[1]=='')&&(time[2]=='')){
             //wrong[2]=1
             document.getElementById('wrong').innerHTML = 'You have not set the time!';
             $("#wrong").css('display', 'block');
