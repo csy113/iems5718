@@ -4,6 +4,10 @@ var time=["","",""];
 var wrong=[1,1,1,1];
 var flag;
 var min=0;
+var votelength;
+var timetemp1='';
+var timetemp2='';
+var timetemp3='';
 //var initialeventid=$('#eventid').val();
 function saveChoice(){
   var finalTime='';
@@ -109,6 +113,7 @@ function setTime() {
  	divIdName="my"+count+"Div";
   flag=count-min;
   $('#timeContent').append(' <div id='+divIdName+' style="font-family:courier">'+timeSlot+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="#" onclick="deleteTime(\'' + divIdName + '\')">   Delete</a></div>');
+  $("#datetime").val('');
   time[(count-1)]=timeSlot;
   //alert(time[count-1]);
   count++;
@@ -119,8 +124,49 @@ function setTime() {
     $("#datetime").attr("disabled", "disabled");
   }
 }
+
+
+
 function endSubmit(){
   window.location.href="/home"; 
+}
+
+
+function saveChange(){
+
+  //alert(votelength);
+  if(votelength==1){
+    timetemp1=$("#temp0").val(); 
+  }else if(votelength==2){
+    //alert("enter length");
+    timetemp1=$('#temp0').val();
+    timetemp2=$('#temp1').val();
+  }else if(votelength==3){
+    timetemp1=$('#temp0').val();
+    timetemp2=$('#temp1').val();
+    timetemp3=$('#temp2').val();
+  }
+  //alert($("temp1").val());
+       $.ajax({
+        url:'/event/submit',
+        type:'POST',
+        data: {
+          name:$("#input-name").val(), 
+          introduction:$("#introduction").val(), 
+          my1Time:timetemp1,
+          my2Time:timetemp2, 
+          my3Time:timetemp3, 
+          location:$("#pac-input").val(), 
+          coordinate:coordinate,
+          eventid:$('#eventid').val(),
+        },
+        
+       }).done(function(data) {
+          $('#changeModal').modal('show');  
+       });
+  
+
+  
 }
 function submitForm(){
     //alert(typeof($("#input-name").val()));
@@ -144,9 +190,9 @@ function submitForm(){
          endSubmit();   
        });
     //  event.preventDefault();
-
+     // alert($("#my1Time").val());
       //alert('Successfully create this event!');
-      $("#submitEvent").attr("disabled", "disabled");
+      //Z$("#submitEvent").attr("disabled", "disabled");
      // jConfirm('Successfully initial this event!', 'Confirmation Dialog', function() {
   
   
@@ -204,7 +250,7 @@ function errorCheck(){
 
 $(document).ready(function() {
   //alert(length);
-  
+  votelength=$("#length").val();
   if($("#datetime").val().length==0)
     $("#confirm_date").attr("disabled","disabled");
   $('#datetime').blur(function()          //whenever you click off an input element
@@ -226,13 +272,14 @@ $(document).ready(function() {
     $("#cancelEvent").hide();
     $("#finalizeevent").hide();
   }
-  var votelength=$("#length").val();
+  
   //if(votelength>=3){
   if($("#eventid").val().length!=0){
     
   	$("#confirm_date").attr("disabled", "disabled");
     $("#datetime").attr("disabled", "disabled");
   }
+  //alert($('eventid').val());
   //}
 	var date = new Date;
   //date.setTime(result_from_Date_getTime);
