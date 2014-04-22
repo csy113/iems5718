@@ -46,7 +46,8 @@ function submitComment(){
   if($('#commentContent').val()=="")
     $("#commentwrong").css('display', 'block');
   else{
-    $('#commentTable').prepend('<tr><td><span style="color:blue">'+userName+'</span>: '+comment+' </td><td>'+tempTime+'</td></tr>');
+    $('#commentTable').prepend('<tr><td><span style="color:blue">'+userName+'</span>: '+
+			htmlEscape(comment)+' </td><td>'+tempTime+'</td></tr>');
 	  //$('#commentTable tr:first').after('<tr></tr>');
     $('#commentContent').val('');
     //alert(comment);
