@@ -9,6 +9,9 @@ var timetemp1='';
 var timetemp2='';
 var timetemp3='';
 //var initialeventid=$('#eventid').val();
+function endSubmit(){
+  window.location.href="/home"; 
+}
 function saveChoice(){
   var finalTime='';
   var i=0;
@@ -126,9 +129,7 @@ function setTime() {
 
 
 
-function endSubmit(){
-  window.location.href="/home"; 
-}
+
 
 
 function saveChange(){
