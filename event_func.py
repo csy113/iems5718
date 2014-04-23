@@ -156,7 +156,7 @@ def getEventListByOwner(ownerUserID):
 	Return a list of event created by the user with ownerUserID
 	"""
 	query = Event.query(Event.ownerid==ownerUserID)
-	return _fetchEventList(query).order(-Event.createTime)
+	return _fetchEventList(query)
 
 def getEventListByVoter(voterUserID):
 	"""
