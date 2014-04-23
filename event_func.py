@@ -148,7 +148,7 @@ def getEventList():
 	"""
 	Return a list of event in the format of [name, location, time, eventid, cancelled]
 	"""
-	query = Event.query()
+	query = Event.query().order(-Event.createTime)
 	return _fetchEventList(query)
 
 def getEventListByOwner(ownerUserID):
@@ -156,13 +156,13 @@ def getEventListByOwner(ownerUserID):
 	Return a list of event created by the user with ownerUserID
 	"""
 	query = Event.query(Event.ownerid==ownerUserID)
-	return _fetchEventList(query)
+	return _fetchEventList(query).order(-Event.createTime)
 
 def getEventListByVoter(voterUserID):
 	"""
 	Return a list of event a user has voted
 	"""
-	query = EventVote.query(EventVote.userid==voterUserID)
+	query = EventVote.query(EventVote.userid==voterUserID).order(-Event.createTime)
 	result = query.fetch()
 	eventlist = []
 	for eventvote in result:
