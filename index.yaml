@@ -16,6 +16,12 @@ indexes:
   - name: time
     direction: desc
 
+- kind: EventVote
+  properties:
+  - name: userid
+  - name: createTime
+    direction: desc
+
 - kind: Person
   properties:
   - name: age
