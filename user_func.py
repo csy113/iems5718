@@ -8,12 +8,10 @@ class User(ndb.Model):
 	createTime = ndb.DateTimeProperty(auto_now_add=True)
 	lastLoginTime = ndb.DateTimeProperty(auto_now=True)
 
-def getCurrentUser(requestHandler):
+def getCurrentUser():
 	user = users.get_current_user()
 	if user:
 		addUser(user.user_id(), user.email(), user.nickname())
-	else:
-		requestHandler.redirect(users.create_login_url(requestHandler.request.uri))
 	return user
 	
 

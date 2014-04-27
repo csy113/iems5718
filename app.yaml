@@ -23,15 +23,19 @@ handlers:
 
 - url: /event/.*
   script: event.app
+  login: required
 
 - url: /home.*
   script: home.app
+  login: required
   
 - url: /comments/.*
   script: comment.app
+  login: required
 
 - url: /report/.*
   script: report.app
+  login: required
 
 - url: /images
   static_dir: images

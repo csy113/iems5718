@@ -85,7 +85,7 @@ def listCountNonNone(list):
 
 class ViewEvent(webapp2.RequestHandler):
 	def get(self):
-		user = user_func.getCurrentUser(self)
+		user = user_func.getCurrentUser()
 		logoutlink = users.create_logout_url('/')
 		eventid = self.request.get('eventid')
 		logging.info('Received view event request with eventid ' + eventid)
@@ -125,7 +125,7 @@ class ViewEvent(webapp2.RequestHandler):
 
 class EditEvent(webapp2.RequestHandler):
 	def get(self):
-		user = user_func.getCurrentUser(self)
+		user = user_func.getCurrentUser()
 		userlist = user_func.getUserNameList()
 		logoutlink = users.create_logout_url('/')
 		template_values = {

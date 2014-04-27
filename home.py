@@ -16,7 +16,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class HomePage(webapp2.RequestHandler):
 	def get(self):
-		user = user_func.getCurrentUser(self)
+		user = user_func.getCurrentUser()
 		logoutlink = users.create_logout_url('/')
 		userlist = user_func.getUserNameList()
 		eventlist = event_func.getEventList()
@@ -31,7 +31,7 @@ class HomePage(webapp2.RequestHandler):
 
 class JoinedEventPage(webapp2.RequestHandler):
 	def get(self):
-		user = user_func.getCurrentUser(self)
+		user = user_func.getCurrentUser()
 		logoutlink = users.create_logout_url('/')
 		userlist = user_func.getUserNameList()
 		eventlist = event_func.getEventListByVoter(user.user_id())
@@ -46,7 +46,7 @@ class JoinedEventPage(webapp2.RequestHandler):
 
 class MyEventPage(webapp2.RequestHandler):
 	def get(self):
-		user = user_func.getCurrentUser(self)
+		user = user_func.getCurrentUser()
 		logoutlink = users.create_logout_url('/')
 		userlist = user_func.getUserNameList()
 		eventlist = event_func.getEventListByOwner(user.user_id())
