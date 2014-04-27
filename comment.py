@@ -1,6 +1,7 @@
 import webapp2
 import comment_func
 from google.appengine.api import users
+import session
 
 import os
 # import module for templates
@@ -15,6 +16,9 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class AddComment(webapp2.RequestHandler):
 	def post(self):
+		if session.checkTokenValid(self) is False:
+			return
+
 		eventid = self.request.get('eventid')
 		comment = self.request.get('comment')
 

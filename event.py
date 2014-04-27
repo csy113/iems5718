@@ -2,6 +2,7 @@ import webapp2
 import event_func
 import user_func
 import comment_func
+import session
 from google.appengine.api import users
 
 import os
@@ -17,6 +18,8 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class SubmitEvent(webapp2.RequestHandler):
 	def post(self):
+		if session.checkTokenValid(self) is False:
+			return
 		ownerid = users.get_current_user().user_id()
 		name = self.request.get('name')
 		summary = self.request.get('introduction')
@@ -49,6 +52,8 @@ class SubmitEvent(webapp2.RequestHandler):
 
 class SubmitVote(webapp2.RequestHandler):
 	def post(self):
+		if session.checkTokenValid(self) is False:
+			return
 		userid = users.get_current_user().user_id()
 		eventid = self.request.get('eventid')
 		firstVote = self.request.get('firstVote')
@@ -65,18 +70,22 @@ class SubmitVote(webapp2.RequestHandler):
 
 class SubmitCancel(webapp2.RequestHandler):
 	def post(self):
+		if session.checkTokenValid(self) is False:
+			return
 		eventid = self.request.get('eventid')
 		event_func.cancelEvent(eventid)
 
 class SubmitFinalize(webapp2.RequestHandler):
 	def post(self):
+		if session.checkTokenValid(self) is False:
+			self.redirect('/')
 		eventid = self.request.get('eventid')
 		finaltime = self.request.get('finaltime')
 		logging.info ('eventid %s, finaltime %s' % (eventid, finaltime))
 		event_func.finalizeEvent(int(eventid), finaltime)
 		
 
-def listCountNonNone(list):
+def _listCountNonNone(list):
 	count = 0
 	for i in list:
 		if i is not None:
@@ -91,7 +100,7 @@ class ViewEvent(webapp2.RequestHandler):
 		logging.info('Received view event request with eventid ' + eventid)
 		event = event_func.getEvent(int(eventid))
 		datelist = [event.my1Time, event.my2Time, event.my3Time]
-		length = listCountNonNone(datelist)
+		length = _listCountNonNone(datelist)
 		votelist = event_func.getVoteNoList(int(eventid), None)
 		chosenlist = event_func.getVoteNoList(int(eventid), user.user_id()) 
 		commentlist = comment_func.getCommentList(eventid)
@@ -100,6 +109,7 @@ class ViewEvent(webapp2.RequestHandler):
 		template_values = {
 			'logoutlink' : logoutlink,
 			'user': user,
+			'csrftoken' : session.getOrInsertCSRFToken(self).token,
 			'ownername': ownername,
 			'eventname': event.name,
 			'location': event.location,
@@ -130,6 +140,7 @@ class EditEvent(webapp2.RequestHandler):
 		logoutlink = users.create_logout_url('/')
 		template_values = {
 			'logoutlink' : logoutlink,
+			'csrftoken' : session.getOrInsertCSRFToken(self).token,
 			'user': user,
 			'lat': 22.413533,
 			'long': 114.21031,

@@ -1,6 +1,7 @@
 import webapp2
 import event_func
 import user_func
+import session
 from google.appengine.api import users
 
 import os
@@ -22,6 +23,7 @@ class HomePage(webapp2.RequestHandler):
 		eventlist = event_func.getEventList()
 		template_values = {
 			'logoutlink' : logoutlink,
+			'csrftoken' : session.getOrInsertCSRFToken(self).token,
 			'user' : user,
 			'userlist' : userlist,
 			'eventlist' : eventlist
@@ -37,6 +39,7 @@ class JoinedEventPage(webapp2.RequestHandler):
 		eventlist = event_func.getEventListByVoter(user.user_id())
 		template_values = {
 			'logoutlink' : logoutlink,
+			'csrftoken' : session.getOrInsertCSRFToken(self).token,
 			'userlist' : userlist,
 			'user' : user,
 			'eventlist' : eventlist
@@ -52,6 +55,7 @@ class MyEventPage(webapp2.RequestHandler):
 		eventlist = event_func.getEventListByOwner(user.user_id())
 		template_values = {
 			'logoutlink' : logoutlink,
+			'csrftoken' : session.getOrInsertCSRFToken(self).token,
 			'userlist' : userlist,
 			'user' : user,
 			'eventlist' : eventlist
