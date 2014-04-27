@@ -1,6 +1,6 @@
 from google.appengine.ext import ndb    
 import logging
-from user_func import getUserInfo
+from user_func import getUserInfo, getCurrentUser
 from time_func import str2datetime, datetime2str, getTimeNow, isToday
 from comment_func import getCommentList
 from sendmail import sendImmediateEmail
@@ -29,13 +29,13 @@ class EventVote(ndb.Model):
 	my3Vote = ndb.IntegerProperty()
 	lastModifiedTime = ndb.DateTimeProperty(auto_now=True)
 
-def permitted():
-	return True
+def _permitted(ownerid):
+	currentUser = getCurrentUser()
+	return ownerid == currentUser.user_id()
 
 def addEvent(ownerid, name, summary, my1Time, my2Time, my3Time, location,
 	lagitude, longitude, eventid):
-	if permitted():
-		# how to verify it is really a eventid?
+	if _permitted(ownerid):
 		if eventid == '':
 			event = Event()
 			event.cancelled=False
@@ -57,17 +57,18 @@ def addEvent(ownerid, name, summary, my1Time, my2Time, my3Time, location,
 		logging.info('Event added with key %s' % key)
 
 def cancelEvent(eventid):
-	if permitted():
-		event = getEvent(int(eventid))
+	event = getEvent(int(eventid))
+	if _permitted(event.ownerid):
 		event.cancelled = True
 		event.cancelTime = getTimeNow()
 		event.put()
 
 def finalizeEvent(eventid, finaltime):
 	event = ndb.Key('Event', int(eventid)).get()
-	event.finalized=True
-	event.finaltime=str2datetime(finaltime)
-	event.put()
+	if _permitted(event.ownerid):
+		event.finalized=True
+		event.finaltime=str2datetime(finaltime)
+		event.put()
 
 	sendImmediateEmail(eventid, event.name)
 
