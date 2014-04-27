@@ -5,8 +5,8 @@ import user_func
 from google.appengine.api import mail
 import logging
 
-senderemail="iemscsy@gmail.com"
-projectid="static-shine-554"
+senderemail="wwang34@gmail.com"
+projectid="thermal-highway-510"
 
 def sendImmediateEmail(eventid,eventname):
 	logging.info("email test")
