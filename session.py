@@ -14,7 +14,7 @@ def checkTokenValid(webapp2ReqHandle):
 		sessionID = None
 		ret = False
 	else:
-		csrfToken = webapp2ReqHandle.request.get('csrfToken')
+		csrfToken = webapp2ReqHandle.request.get('csrftoken')
 		storedToken= ndb.Key('CSRFToken', sessionID).get()
 		if storedToken is None:
 			ret = False
@@ -22,7 +22,7 @@ def checkTokenValid(webapp2ReqHandle):
 			ret = (storedToken.token == csrfToken)
 
 	if ret == False:
-		logging.warn('CSRF Token is invalid')
+		logging.warn('CSRF Token [%s] is invalid' % csrfToken)
 		return ret
 
 def _setCookie(webapp2ReqHandle, sessionID):
