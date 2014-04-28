@@ -66,7 +66,7 @@ function submitComment(){
       data:{
         comment:comment,
         eventid:$("#eventId").val(),
-        csrftoken:csrftoken,
+        csrftoken:$('#csrftoken').val(),
       }
     });
   }
@@ -91,7 +91,7 @@ function joinEvent(){
           secVote:secVote,
           thirdVote:thirdVote,
           eventid:$("#eventId").val(),
-          csrftoken:csrftoken,
+          csrftoken:$('#csrftoken').val(),
         }
       });
   //jConfirm('Successfully join this event!', 'Confirmation Dialog', function() {

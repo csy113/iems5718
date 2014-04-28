@@ -35,7 +35,7 @@ function saveChoice(){
       data:{
         finaltime:finalTime,
         eventid:$('#eventid').val(),
-        csrftoken:csrftoken,
+        csrftoken:$("#csrftoken").val(),
       }
    }).done(function(data) {
          endSubmit();   
@@ -66,7 +66,7 @@ function submitComment(){
       data:{
         comment:comment,
         eventid:$('#eventid').val(),
-        csrftoken:csrftoken,
+        csrftoken:$("#csrftoken").val(),
       }
     });
   }
@@ -87,7 +87,7 @@ function cancel(){
     type:'POST',
     data:{
       eventid:$('#eventid').val(),
-      csrftoken:csrftoken,
+      csrftoken:$("#csrftoken").val(),
     }
   }).done(function(data) {
          endSubmit();   
@@ -164,7 +164,7 @@ function saveChange(){
           location:$("#pac-input").val(), 
           coordinate:coordinate,
           eventid:$('#eventid').val(),
-          csrftoken:csrftoken,
+          csrftoken:$("#csrftoken").val(),
         },
         
        }).done(function(data) {
@@ -190,7 +190,7 @@ function submitForm(){
           location:$("#pac-input").val(), 
           coordinate:coordinate,
           eventid:$('#eventid').val(),
-          csrftoken:csrftoken,
+          csrftoken:$("#csrftoken").val(),
         },
         
        }).done(function(data) {
