@@ -8,6 +8,7 @@ var votelength;
 var timetemp1='';
 var timetemp2='';
 var timetemp3='';
+var csrftoken='';
 //var initialeventid=$('#eventid').val();
 function endSubmit(){
   window.location.href="/home"; 
@@ -34,6 +35,7 @@ function saveChoice(){
       data:{
         finaltime:finalTime,
         eventid:$('#eventid').val(),
+        csrftoken:csrftoken,
       }
    }).done(function(data) {
          endSubmit();   
@@ -64,6 +66,7 @@ function submitComment(){
       data:{
         comment:comment,
         eventid:$('#eventid').val(),
+        csrftoken:csrftoken,
       }
     });
   }
@@ -84,6 +87,7 @@ function cancel(){
     type:'POST',
     data:{
       eventid:$('#eventid').val(),
+      csrftoken:csrftoken,
     }
   }).done(function(data) {
          endSubmit();   
@@ -160,6 +164,7 @@ function saveChange(){
           location:$("#pac-input").val(), 
           coordinate:coordinate,
           eventid:$('#eventid').val(),
+          csrftoken:csrftoken,
         },
         
        }).done(function(data) {
@@ -185,6 +190,7 @@ function submitForm(){
           location:$("#pac-input").val(), 
           coordinate:coordinate,
           eventid:$('#eventid').val(),
+          csrftoken:csrftoken,
         },
         
        }).done(function(data) {
@@ -253,6 +259,7 @@ function errorCheck(){
 $(document).ready(function() {
   //alert(length);
   votelength=$("#length").val();
+  csrftoken=$('#csrftoken').val();
   if($("#datetime").val().length==0)
     $("#confirm_date").attr("disabled","disabled");
   $('#datetime').blur(function()          //whenever you click off an input element

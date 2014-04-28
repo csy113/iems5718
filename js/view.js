@@ -4,7 +4,7 @@ var coordinate='';
 var n;
 var min=0;
 var flag=0;
-
+var csrftoken='';
 function deleteTime(divNum) {
 	event.preventDefault();
 	$('#'+divNum).remove();
@@ -66,6 +66,7 @@ function submitComment(){
       data:{
         comment:comment,
         eventid:$("#eventId").val(),
+        csrftoken:csrftoken,
       }
     });
   }
@@ -90,6 +91,7 @@ function joinEvent(){
           secVote:secVote,
           thirdVote:thirdVote,
           eventid:$("#eventId").val(),
+          csrftoken:csrftoken,
         }
       });
   //jConfirm('Successfully join this event!', 'Confirmation Dialog', function() {
@@ -107,7 +109,7 @@ function joinEvent(){
   }
 }
 $(document).ready(function() {
-
+  csrftoken=$('#csrftoken').val();
   var date = new Date;
   //date.setTime(result_from_Date_getTime);
   var seconds = date.getSeconds();
