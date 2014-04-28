@@ -4,6 +4,7 @@ from user_func import getUserInfo, getCurrentUser
 from time_func import str2datetime, datetime2str, getTimeNow, isToday
 from comment_func import getCommentList
 from sendmail import sendImmediateEmail
+from django.utils.html import strip_tags
 
 class Event(ndb.Model):
 	ownerid = ndb.StringProperty()
@@ -43,12 +44,12 @@ def addEvent(ownerid, name, summary, my1Time, my2Time, my3Time, location,
 		else:
 			event = ndb.Key('Event', int(eventid)).get()
 		event.ownerid = ownerid
-		event.name = name
-		event.summary = summary
+		event.name = strip_tags(name)
+		event.summary = strip_tags(summary)
 		event.my1Time=str2datetime(my1Time)
 		event.my2Time=str2datetime(my2Time)
 		event.my3Time=str2datetime(my3Time)
-		event.location=location
+		event.location=strip_tags(location)
 		if lagitude is not None:
 			event.lagitude=lagitude
 		if longitude is not None:
