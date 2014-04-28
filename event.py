@@ -78,7 +78,7 @@ class SubmitCancel(webapp2.RequestHandler):
 class SubmitFinalize(webapp2.RequestHandler):
 	def post(self):
 		if session.checkTokenValid(self) is False:
-			self.redirect('/')
+			return
 		eventid = self.request.get('eventid')
 		finaltime = self.request.get('finaltime')
 		logging.info ('eventid %s, finaltime %s' % (eventid, finaltime))
