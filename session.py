@@ -1,6 +1,6 @@
 from google.appengine.ext import ndb    
 from random import randrange
-import users
+from google.appengine.api import users
 import logging
 
 class CSRFToken(ndb.Model):
