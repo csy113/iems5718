@@ -33,6 +33,10 @@ handlers:
   script: comment.app
   login: required
 
+- url: /logout
+  script: logout.app
+  login: required
+
 - url: /report/.*
   script: report.app
   login: required

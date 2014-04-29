@@ -18,11 +18,10 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 class HomePage(webapp2.RequestHandler):
 	def get(self):
 		user = user_func.getCurrentUser()
-		logoutlink = users.create_logout_url('/')
 		userlist = user_func.getUserNameList()
 		eventlist = event_func.getEventList()
 		template_values = {
-			'logoutlink' : logoutlink,
+			'logoutlink' : '/logout',
 			'csrftoken' : session.getOrInsertCSRFToken(self).token,
 			'user' : user,
 			'userlist' : userlist,
@@ -34,11 +33,10 @@ class HomePage(webapp2.RequestHandler):
 class JoinedEventPage(webapp2.RequestHandler):
 	def get(self):
 		user = user_func.getCurrentUser()
-		logoutlink = users.create_logout_url('/')
 		userlist = user_func.getUserNameList()
 		eventlist = event_func.getEventListByVoter(user.user_id())
 		template_values = {
-			'logoutlink' : logoutlink,
+			'logoutlink' : '/logout',
 			'csrftoken' : session.getOrInsertCSRFToken(self).token,
 			'userlist' : userlist,
 			'user' : user,
@@ -50,11 +48,10 @@ class JoinedEventPage(webapp2.RequestHandler):
 class MyEventPage(webapp2.RequestHandler):
 	def get(self):
 		user = user_func.getCurrentUser()
-		logoutlink = users.create_logout_url('/')
 		userlist = user_func.getUserNameList()
 		eventlist = event_func.getEventListByOwner(user.user_id())
 		template_values = {
-			'logoutlink' : logoutlink,
+			'logoutlink' : '/logout',
 			'csrftoken' : session.getOrInsertCSRFToken(self).token,
 			'userlist' : userlist,
 			'user' : user,

@@ -61,5 +61,5 @@ def deleteCSRFToken(webapp2ReqHandle):
 		pass
 	else:
 		ndb.Key('CSRFToken', sessionID).delete()
-		webapp2ReqHandle.response.unset_cookie('sessionid')
+		webapp2ReqHandle.response.delete_cookie('sessionid')
 

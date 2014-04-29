@@ -95,7 +95,6 @@ def _listCountNonNone(list):
 class ViewEvent(webapp2.RequestHandler):
 	def get(self):
 		user = user_func.getCurrentUser()
-		logoutlink = users.create_logout_url('/')
 		eventid = self.request.get('eventid')
 		logging.info('Received view event request with eventid ' + eventid)
 		event = event_func.getEvent(int(eventid))
@@ -107,7 +106,7 @@ class ViewEvent(webapp2.RequestHandler):
 		joineduserlist = event_func.getJoinedUserList(int(eventid))
 		ownername = user_func.getUserInfo(event.ownerid).name
 		template_values = {
-			'logoutlink' : logoutlink,
+			'logoutlink' : '/logout',
 			'user': user,
 			'csrftoken' : session.getOrInsertCSRFToken(self).token,
 			'ownername': ownername,
@@ -137,9 +136,8 @@ class EditEvent(webapp2.RequestHandler):
 	def get(self):
 		user = user_func.getCurrentUser()
 		userlist = user_func.getUserNameList()
-		logoutlink = users.create_logout_url('/')
 		template_values = {
-			'logoutlink' : logoutlink,
+			'logoutlink' : '/logout',
 			'csrftoken' : session.getOrInsertCSRFToken(self).token,
 			'user': user,
 			'lat': 22.413533,
