@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 
 timeformat="%Y-%m-%d %H:%M:%S"
@@ -23,3 +23,6 @@ def isToday(inputdate):
 	
 def getTimeNow():
 	return datetime.now()
+
+def getTimeFromNow(hour):
+	return datetime.now() + timedelta(hours=hour)

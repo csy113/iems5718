@@ -1,6 +1,7 @@
 from google.appengine.ext import ndb    
 from random import randrange
 from google.appengine.api import users
+from time_func import getTimeFromNow
 import logging
 
 class CSRFToken(ndb.Model):
@@ -8,6 +9,7 @@ class CSRFToken(ndb.Model):
 	token = ndb.StringProperty()
 
 def checkTokenValid(webapp2ReqHandle):
+	csrfToken = None
 	try:
 		sessionID = int(webapp2ReqHandle.request.cookies.get('sessionid'))
 	except TypeError:
@@ -26,8 +28,8 @@ def checkTokenValid(webapp2ReqHandle):
 		return ret
 
 def _setCookie(webapp2ReqHandle, sessionID):
-#TODO add expire time
-	webapp2ReqHandle.response.set_cookie('sessionid', '%d' % sessionID, httponly=True)
+	webapp2ReqHandle.response.set_cookie('sessionid', '%d' % sessionID,
+		httponly=True, expires=getTimeFromNow(1))
 
 def _createCSRFToken():
 	token = '%s' % randrange(1000, 99999999)
@@ -51,7 +53,9 @@ def getOrInsertCSRFToken(webapp2ReqHandle):
 	if csrfToken is None:
 		csrfToken = _createCSRFToken()
 		_setCookie(webapp2ReqHandle, csrfToken.key.id())
-	logging.info('Token retrived: %s' % csrfToken)
+		logging.info('Token created : %s' % csrfToken)
+	else:
+		logging.info('Token retrived: %s' % csrfToken)
 	return csrfToken
 
 def deleteCSRFToken(webapp2ReqHandle):
